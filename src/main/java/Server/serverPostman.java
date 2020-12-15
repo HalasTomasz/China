@@ -18,17 +18,21 @@ import java.util.concurrent.Executors;
  * Server -> Client WELCOME <char> VALID_MOVE OTHER_PLAYER_MOVED <n>
  * OTHER_PLAYER_LEFT VICTORY DEFEAT TIE MESSAGE <text>
  */
-public class Server {
+public class serverPostman {
 
-    public static void main(String[] args) throws Exception {
+
+    public  serverPostman(String board, int amountPlayers) throws Exception {
         try (var listener = new ServerSocket(58901)) {
-            System.out.println("Tic Tac Toe Server is Running...");
+            System.out.println("Cheese Cheeckers Server is Running...");
             var pool = Executors.newFixedThreadPool(200);
             while (true) {
-                Game game = new Game();
-                pool.execute(game.new Player(listener.accept(), 'X'));
-                pool.execute(game.new Player(listener.accept(), 'O'));
+                for(int x = 0; x<amountPlayers; x++){
+                    pool.execute(serverHead.newPlayer(listener.accept()));
+                }
+ //               pool.execute(serverHead.newPlayer(listener.accept()));
             }
+        }catch (Exception e) {
+            System.out.println("Nie udalo sie otworzyc socket");
         }
     }
 }
