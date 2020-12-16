@@ -33,12 +33,11 @@ public class Client {
                 } else if (response.startsWith("VALID_MOVE")) {
 
                 } else if (response.startsWith("VICTORY")) {
-
                     break;
                 } else if (response.startsWith("DEFEAT")) {
 
                     break;
-                } else if (response.startsWith("SWAP")) {
+                } else if (response.startsWith("MOVE")) {
 
                     break;
                 } else if (response.startsWith("OTHER_PLAYER_LEFT")) {

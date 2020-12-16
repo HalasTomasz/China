@@ -13,32 +13,15 @@ public class serverHead {
     int[] currentField = { -1, -1};
     ArrayList<Rule> rules;
     ArrayList<RuleMove> moves;
-    String stringConverter;
-    public serverHead(String board, int amountPlayers, ArrayList<String> rules, ArrayList<String> moves){
+
+    public void init(LogicBoard board, int amountPlayers, ArrayList<Rule> listRule, ArrayList<RuleMove> listMove) {
         try {
             this.amountPlayers = amountPlayers;
+            this.board = board;
+            this.rules = listRule;
+            this.moves = listMove;
 
-            stringConverter = serverHead.class.getPackage().getName() + "." + board;
-            Class<?> clazz = Class.forName(stringConverter);
-            Constructor<?> ctor = clazz.getConstructor(serverHead.class);
-            this.board = (LogicBoard) ctor.newInstance(new Object[] { this });
-
-            for(String rule: rules){
-                stringConverter = serverHead.class.getPackage().getName() + "." + rule;
-                clazz = Class.forName(stringConverter);
-                ctor = clazz.getConstructor(serverHead.class);
-                this.rules.add((Rule) ctor.newInstance(new Object[] {this}));
-            }
-
-            for(String move: moves){
-                stringConverter = serverHead.class.getPackage().getName() + "." + move;
-                clazz = Class.forName(stringConverter);
-                ctor = clazz.getConstructor(serverHead.class);
-                this.moves.add((RuleMove) ctor.newInstance(new Object[] {this}));
-            }
-
-
-            serverPostman.start(board, amountPlayers, this);
+            serverPostman.start(this.board.getClass().getName(), amountPlayers, this);
 
         } catch (Exception e) {
             System.out.println("Nie udalo sie otworzyc socket");
@@ -59,11 +42,12 @@ public class serverHead {
                 return;
             }
         }
-       /* for(MoveRule move : moves) {
+        for(Rule move : moves) {
             if(move.check(player, command)){
+                return;
                 //swap(currentField[0], currentField[1], x ,y);
             }
-        }*/
+        }
         /*if (command.startsWith("LEFT")){
             for (Player x : players){
                 x.sendMessage("SB_LEFT");
@@ -91,6 +75,8 @@ public class serverHead {
             player.sendMessage("MOVED " +old_x + ";" + old_y + ";" + x + ";" + y);
         }
     }
+
+
 
   /*  private void move(int x, int y) {
         for(Rule rule : rules) {

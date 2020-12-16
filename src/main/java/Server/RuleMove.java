@@ -3,8 +3,10 @@ package Server;
 public abstract class RuleMove extends Rule {
     int new_x;
     int new_y;
-    RuleMove(serverHead head) {
+    LogicBoard board;
+    RuleMove(serverHead head, LogicBoard board) {
         super(head);
+        this.board = board;
     }
     @Override
     boolean check(Player player, String command){
