@@ -10,10 +10,11 @@ public class serverHead {
     ArrayList<Player> players;
     LogicBoard board;
     int amountPlayers;
-    int[] currentField;
+    int[] currentField = { -1, -1};
     ArrayList<Rule> rules;
+    ArrayList<RuleMove> moves;
     String stringConverter;
-    public serverHead(String board, int amountPlayers, ArrayList<String> rules){
+    public serverHead(String board, int amountPlayers, ArrayList<String> rules, ArrayList<String> moves){
         try {
             this.amountPlayers = amountPlayers;
 
@@ -25,8 +26,15 @@ public class serverHead {
             for(String rule: rules){
                 stringConverter = serverHead.class.getPackage().getName() + "." + rule;
                 clazz = Class.forName(stringConverter);
-                ctor = clazz.getConstructor();
-                this.rules.add((Rule) ctor.newInstance(new Object[] {}));
+                ctor = clazz.getConstructor(serverHead.class);
+                this.rules.add((Rule) ctor.newInstance(new Object[] {this}));
+            }
+
+            for(String move: moves){
+                stringConverter = serverHead.class.getPackage().getName() + "." + move;
+                clazz = Class.forName(stringConverter);
+                ctor = clazz.getConstructor(serverHead.class);
+                this.moves.add((RuleMove) ctor.newInstance(new Object[] {this}));
             }
 
 
@@ -46,6 +54,7 @@ public class serverHead {
 
     public synchronized void newMessageRead(Player player, String command) {
         for(Rule rule : rules) {
+            //if rule should stop
             if(rule.check(player, command)){
                 return;
             }

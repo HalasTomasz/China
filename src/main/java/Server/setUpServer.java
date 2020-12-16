@@ -9,11 +9,12 @@ public class setUpServer {
             add("ruleA");
             add("ruleB");
             add("ruleC");
+        }};
+        ArrayList<String> listMove = new ArrayList<String>() {{
             add("moveA");
             add("moveB");
         }};
-
-        serverHead game = new serverHead("classiBoard", 2, listRule);
+        serverHead game = new serverHead("classiBoard", 2, listRule, listMove);
 
     }
 }

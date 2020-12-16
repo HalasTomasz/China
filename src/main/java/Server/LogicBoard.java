@@ -1,4 +1,5 @@
 package Server;
 
-public interface LogicBoard {
+public abstract class LogicBoard {
+
 }

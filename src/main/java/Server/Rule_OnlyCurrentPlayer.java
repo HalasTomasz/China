@@ -9,6 +9,10 @@ public class Rule_OnlyCurrentPlayer extends Rule {
 
     @Override
     boolean check(Player player, String command) {
+        if (!head.currentPlayer.equals(player)) {
+            head.newMessageWrite("NOT_YOU", player);
+            return true;
+        }
         return false;
     }
 }
