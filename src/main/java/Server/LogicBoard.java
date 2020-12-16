@@ -29,4 +29,12 @@ public abstract class LogicBoard {
             }
 
     }
+
+    public String getFieldColor(int x, int y){
+        return fields[x][y].getColor();
+    }
+
+    public void setFieldColor(int x, int y,String color) {
+        fields[x][y].setColor(color);
+    }
 }

@@ -1,12 +1,13 @@
-package Client.GUI;
+package Client.Frame;
 
 public class SetBoardShape {
 	
-	public DrawBoard returnBoardShape(String type){
-		if(type =="star") {
+	public static DrawBoard returnBoardShape(String type){
+		
+		if(type.equals("Classical")) {
 			return new StarBoard();
 		}
-		else if(type =="square"){
+		else if(type.equals("Square")){
 			return new SquareBoard();
 		}
 		else {

@@ -9,6 +9,10 @@ public class RuleMove_Simple extends RuleMove{
 
     @Override
     protected boolean canDo() {
+        if(board.getFieldColor(new_x,new_y).equals("white")){
+            doMove();
+            return true;
+        }
         return false;
     }
 

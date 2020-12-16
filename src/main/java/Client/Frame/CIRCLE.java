@@ -1,4 +1,4 @@
-package Client.GUI;
+package Client.Frame;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;

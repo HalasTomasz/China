@@ -1,4 +1,4 @@
-package Client.GUI;
+package Client.Frame;
 
 public class RectangleBoard extends Board {
 	public RectangleBoard(int sizeX, int sizeY){

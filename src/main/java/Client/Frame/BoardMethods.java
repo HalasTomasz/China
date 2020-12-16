@@ -1,4 +1,4 @@
-package Client.GUI;
+package Client.Frame;
 
 import java.util.ArrayList;
 

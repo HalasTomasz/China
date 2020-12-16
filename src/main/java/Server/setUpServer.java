@@ -14,9 +14,10 @@ public class setUpServer {
 
         ArrayList<RuleMove> listMove = new ArrayList<>();
         listRule.add(new RuleMove_Simple(game, board));
+        String shape = "Circle";
 
 
-        game.init(board, 2, listRule, listMove);
+        game.init(board, 2, listRule, listMove, shape);
 
     }
 }

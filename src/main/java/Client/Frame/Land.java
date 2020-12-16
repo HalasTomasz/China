@@ -1,4 +1,5 @@
-package Client.GUI;
+package Client.Frame;
+
 import java.awt.*;
 
 public interface Land extends Shape{

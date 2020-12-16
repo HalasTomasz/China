@@ -9,8 +9,8 @@ public class Rule_WaitAtStart extends Rule {
 
     @Override
     boolean check(Player player, String command) {
-        if (head.players.size() != head.amountPlayers){
-            head.newMessageWrite("WAIT", player);
+        if (command.startsWith("WAITING")){
+            head.newMessageWrite("WAIT_FOR_OTHER " + head.board.getClass().getName() + ";" + head.getShape() + ";" + player.getColor() + ";" + head.getAmountPlayers(), player);
             return true;
         }
         return false;

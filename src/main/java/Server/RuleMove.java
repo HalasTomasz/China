@@ -14,7 +14,11 @@ public abstract class RuleMove extends Rule {
             try {
                 new_x = Integer.parseInt(command.substring(5).split(";")[0]);
                 new_y = Integer.parseInt(command.substring(5).split(";")[1]);
-                return canDo();
+                if (canDo()){
+                    head.newMessageWrite(command, player);
+
+                    return true;
+                }
             }catch (Exception e){
                 head.newMessageWrite("BAD_DATA", player);
             }
@@ -24,5 +28,18 @@ public abstract class RuleMove extends Rule {
     }
 
     protected abstract boolean canDo();
+
+    void doMove(){
+        board.setFieldColor(new_x, new_y, head.currentPlayer.getColor());
+        board.setFieldColor(head.currentX, head.currentY, "white");
+        for (Player player: head.getPlayers()) {
+            head.newMessageWrite("CHANGE " + new_x + ";" + new_y + ";" + player.getColor(), player);
+            head.newMessageWrite("CHANGE " + head.currentX + ";" + head.currentY + ";" + "white", player);
+        }
+        //
+        head.setCurrentX(new_x);
+        head.setCurrentY(new_y);
+    }
+
 
 }

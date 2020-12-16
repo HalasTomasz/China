@@ -1,4 +1,5 @@
-package Client.GUI;
+package Client.Frame;
+
 import java.util.ArrayList;
 
 public class StarBoard implements DrawBoard {

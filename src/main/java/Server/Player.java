@@ -53,4 +53,8 @@ public class Player implements Runnable {
         output.println(message);
     }
 
+    public String getColor() {
+        return color;
+    }
+
 }

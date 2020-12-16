@@ -3,7 +3,6 @@ package Server;
 import java.util.ArrayList;
 
 public class logicBoard_Classic2P extends logicBoard_Classic {
-    ArrayList<int[]> houses;
     logicBoard_Classic2P(){
         super();
         fields = new Field[17][13];

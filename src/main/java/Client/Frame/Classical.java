@@ -1,4 +1,4 @@
-package Client.GUI;
+package Client.Frame;
 
 import java.util.ArrayList;
 
@@ -23,12 +23,12 @@ public class Classical extends Board{
 	@Override
 	public void addHouses() {
 		houses = new ArrayList<>();
-		int[] house1 ={1,0,4, 0,6, 1,7, 2,5, 3,8};
-		int[] house2 ={0,16,13, 16,6, 15,7, 14,5, 13,8};
-		int[] house3 ={0,7,4, 7,2, 6,1, 5,3, 4,0};
-		int[] house4 ={0,7,4, 7,11, 6,10, 5,12, 4,9};
-		int[] house5 ={1,9,13, 9,2, 10,1, 11,3, 12,0};
-		int[] house6 ={1,9,13, 9,11 ,10,10, 11,12, 12,9};
+		int[] house1 ={1,0,4, 0,6, 1,7, 2,5, 3,8};          //1
+		int[] house2 ={0,16,13, 16,6, 15,7, 14,5, 13,8};    //2
+		int[] house3 ={0,7,4, 7,2, 6,1, 5,3, 4,0};          //3
+		int[] house4 ={0,7,4, 7,11, 6,10, 5,12, 4,9};       //4
+		int[] house5 ={1,9,13, 9,2, 10,1, 11,3, 12,0};      //5
+		int[] house6 ={1,9,13, 9,11 ,10,10, 11,12, 12,9};   //6
 		
 			setHouses(house1);
 			setHouses(house2);
