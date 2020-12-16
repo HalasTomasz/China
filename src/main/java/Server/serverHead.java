@@ -16,7 +16,7 @@ public class serverHead {
     ArrayList<RuleMove> moves;
     private String shape;
 
-    public void init(LogicBoard board, int amountPlayers, ArrayList<Rule> listRule, ArrayList<RuleMove> listMove, String Shape) {
+    public void start(LogicBoard board, int amountPlayers, ArrayList<Rule> listRule, ArrayList<RuleMove> listMove, String Shape) {
         try {
             this.amountPlayers = amountPlayers;
             this.board = board;

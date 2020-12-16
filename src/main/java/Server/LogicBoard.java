@@ -6,12 +6,10 @@ import java.util.ArrayList;
 public abstract class LogicBoard {
 
     Field[][] fields;
-    String color;
 
 
     public void decoder(int[] createTables, String color) {
         int[] tablica = createTables;
-        this.color = color;
 
             if (tablica[0] == 1) {
                 for (int h = 3; h <= tablica.length - 1; h = h + 2) {

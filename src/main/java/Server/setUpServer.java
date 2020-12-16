@@ -3,7 +3,7 @@ package Server;
 import java.util.ArrayList;
 
 public class setUpServer {
-    public static void main() throws Exception {
+    public static void main(String[] args) throws Exception {
         serverHead game = new serverHead();
         ArrayList<Rule> listRule = new ArrayList<>();
         LogicBoard board = new logicBoard_Classic2P();
@@ -17,7 +17,7 @@ public class setUpServer {
         String shape = "Circle";
 
 
-        game.init(board, 2, listRule, listMove, shape);
+        game.start(board, 2, listRule, listMove, shape);
 
     }
 }
