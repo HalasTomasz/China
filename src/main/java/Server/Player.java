@@ -9,26 +9,26 @@ import java.util.Scanner;
 public class Player implements Runnable {
     Socket socket;
     String color;
+    serverHead head;
 
     Scanner input;
     PrintWriter output;
 
-    public Player(Socket socket, String color) {
+    public Player(Socket socket, String color, serverHead head) {
         this.socket = socket;
         this.color= color;
+        this.head = head;
     }
 
     @Override
     public void run() {
         try {
             setup();
-            processCommands();
+            listenClient();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (true) { //jesli gracze istniejaa to
-                System.out.println("Wypisz serwerowi ze wyszedlem");
-            }
+            head.newMessageRead(this, "LEFT");
             try {
                 socket.close();
             } catch (IOException e) {
@@ -42,15 +42,15 @@ public class Player implements Runnable {
         output.println("WELCOME " + color);
     }
 
-    private void processCommands() {
+    private void listenClient() {
         while (input.hasNextLine()) {
             var command = input.nextLine();
-            if (command.startsWith("QUIT")) {
-                return;
-            } else if (command.startsWith("MOVE")) {
-                // wyslij serverowi x, y
-            }
+            head.newMessageRead(this, command);
         }
+    }
+
+    public void sendMessage(String message){
+        output.println(message);
     }
 
 }

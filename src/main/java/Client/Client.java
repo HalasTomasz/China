@@ -27,11 +27,10 @@ public class Client {
 
             while (in.hasNextLine()) {
                 response = in.nextLine();
-                if (response.startsWith("VALID_MOVE")) {
+                if (response.startsWith("NO_PLAYERS")) {
+                } else if (response.startsWith("OPPONENTS_TURN")) {
 
-                } else if (response.startsWith("OPPONENT_MOVED")) {
-
-                } else if (response.startsWith("MESSAGE")) {
+                } else if (response.startsWith("VALID_MOVE")) {
 
                 } else if (response.startsWith("VICTORY")) {
 
@@ -39,7 +38,7 @@ public class Client {
                 } else if (response.startsWith("DEFEAT")) {
 
                     break;
-                } else if (response.startsWith("TIE")) {
+                } else if (response.startsWith("SWAP")) {
 
                     break;
                 } else if (response.startsWith("OTHER_PLAYER_LEFT")) {
@@ -57,7 +56,7 @@ public class Client {
     }
 
     public void writeTouch(int x, int y){
-        out.println("MOVE " + x + " " + y);
+        out.println("MOVE " + x + ";" + y);
 
     }
 

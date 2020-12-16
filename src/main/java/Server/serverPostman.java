@@ -1,10 +1,5 @@
 package Server;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.Arrays;
-import java.util.Scanner;
 import java.util.concurrent.Executors;
 
 /**
@@ -21,18 +16,17 @@ import java.util.concurrent.Executors;
 public class serverPostman {
 
 
-    public  serverPostman(String board, int amountPlayers) throws Exception {
+    public static void start(String board, int amountPlayers, serverHead head) throws Exception {
         try (var listener = new ServerSocket(58901)) {
             System.out.println("Cheese Cheeckers Server is Running...");
             var pool = Executors.newFixedThreadPool(200);
             while (true) {
                 for(int x = 0; x<amountPlayers; x++){
-                    pool.execute(serverHead.newPlayer(listener.accept()));
+                    pool.execute(head.newPlayer(listener.accept()));
                 }
- //               pool.execute(serverHead.newPlayer(listener.accept()));
             }
         }catch (Exception e) {
-            System.out.println("Nie udalo sie otworzyc socket");
+            System.out.println("NO_PLAYERS");
         }
     }
 }
