@@ -6,18 +6,22 @@ public class setUpServer {
     public static void main(String[] args) throws Exception {
         serverHead game = new serverHead();
         ArrayList<Rule> listRule = new ArrayList<>();
-        LogicBoard board = new logicBoard_Classic2P();
-        listRule.add(new Rule_WaitAtStart(game));
+        LogicBoard board = new logicBoard_Classical2P();
+        listRule.add(new Rule_SayHello(game));
         listRule.add(new Rule_SBLeft(game));
+        listRule.add(new Rule_WaitForAll(game));
         listRule.add(new Rule_OnlyCurrentPlayer(game));
-        listRule.add(new Rule_NoActiveField(game));
+
 
         ArrayList<RuleMove> listMove = new ArrayList<>();
-        listRule.add(new RuleMove_Simple(game, board));
+        listMove.add(new RuleMove_IsNotMyChecker(game, board));
+        listMove.add(new RuleMove_NoActiveField(game, board));
+        listMove.add(new RuleMove_SkipTurn(game, board));
+        listMove.add(new RuleMove_SimpleWalk(game, board));
         String shape = "Circle";
 
 
-        game.start(board, 2, listRule, listMove, shape);
+        game.start(board, 2, listRule, listMove, "Circle");
 
     }
 }

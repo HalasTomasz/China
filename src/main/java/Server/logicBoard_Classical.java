@@ -2,10 +2,10 @@ package Server;
 
 import java.util.ArrayList;
 
-public abstract class logicBoard_Classic extends LogicBoard {
+public abstract class logicBoard_Classical extends LogicBoard {
 
 
-        logicBoard_Classic(){
+        logicBoard_Classical(){
 
             fields = new Field[17][13];
             for(int x = 0; x<17; x++){

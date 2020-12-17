@@ -8,8 +8,11 @@ public class Rule_NoActiveField extends Rule{
 
     @Override
     boolean check(Player player, String command) {
-        if (command.startsWith("MOVE")) {
+        System.out.println("Try " + this.getClass().getSimpleName());
+        if (command.startsWith("MOVE") && head.getCurrentX() == -1 && head.getCurrentY() == -1) {
+            System.out.println("Done " + this.getClass().getSimpleName());
             try {
+
                 head.setCurrentX(Integer.parseInt(command.substring(5).split(";")[0]));
                 head.setCurrentY(Integer.parseInt(command.substring(5).split(";")[1]));
                 //head.newMessageWrite("ACTIVE " + head.getCurrentX() + ";" + head.getCurrentY(), player);

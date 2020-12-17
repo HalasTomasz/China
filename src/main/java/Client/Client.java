@@ -10,73 +10,59 @@ import java.net.Socket;
 public class Client {
 
 
-    private Socket socket;
-    private Scanner in;
-    private PrintWriter out;
-
+    private GUI gui;
+    private ClientPostman postman;
 
 
     public Client(String serverAddress) throws Exception {
 
-        socket = new Socket(serverAddress, 58901);
-        in = new Scanner(socket.getInputStream());
-        out = new PrintWriter(socket.getOutputStream(), true);
-
-        readWelcomeMessage();
-        readMessage();
+        postman = new ClientPostman(serverAddress, this);
+        System.out.println(postman != null);
+        postman.takeWelcomeMessage();
+        postman.waitForNewMessage();
 
     }
 
-    public void readWelcomeMessage() throws Exception {
-        try {
-            var responseSetUP = in.nextLine();
-            out.println("WAITNG");
-            while (in.hasNextLine()) {
-                responseSetUP = in.nextLine();
-                if (responseSetUP.startsWith("WAIT_FOR_OTHER ")) {
-                    String[] tmp = responseSetUP.substring(15).split(";");
-                    GUI gui = new GUI(tmp[0], tmp[1], tmp[2], tmp[3]);
-                    break;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+
+
+
+    public void getResponse(String response){
+        System.out.println("FROM SERVER: " + response);
+        if(response.equals("WAIT_FOR_ALL")){
+
         }
-    }
+        else if(response.equals("NOT_YOU")){
 
-
-    public void readMessage() throws Exception {
-        try {
-            var response = in.nextLine();
-
-            while (in.hasNextLine()) {
-                response = in.nextLine();
-                getResponse(response);
-            }
-            out.println("QUIT");
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            socket.close();
-            // zamknij GUI
         }
-    }
+        else if(response.equals("SB_LEFT")){
+            //jakos ladniej wyjdz
+            System.exit(0);
+        }
 
-    private void getResponse(String response){
-        //if
-        //else if
-        //else System.out.println(response);
-        //wysyła do GUI wiadomosc co ma zrobic
+        else if( response.startsWith("CHANGE")){
+            String[] tmp = response.substring(7).split(";");
+            try{
+                System.out.println(tmp[0] +"---" + tmp[1]+"---" + tmp[2]);
+                gui.change(Integer.parseInt(tmp[0]), Integer.parseInt(tmp[1]), tmp[2]);
+            }catch(Exception e){
+                System.out.println("BAD_DATA");
+            }
+        }
 
     }
     public void writeMessage(String message){
-        out.println(message);
-
+        System.out.println("TO SERVER: " + message);
+        postman.sendMessage(message);
     }
 
 
-
-
-
-
+    public boolean WelcomeMassageRead(String responseSetUP) {
+        if (responseSetUP.startsWith("HELLO")) {
+            String[] tmp = responseSetUP.substring(6).split(";");
+            System.out.println(tmp[0]+  tmp[1] + tmp[2] + tmp[3]);
+            gui = new GUI("Classical", tmp[1], tmp[2], tmp[3], this);
+            return true;
+        }
+        return false;
+    }
 }

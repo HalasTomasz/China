@@ -17,16 +17,17 @@ public class serverPostman {
 
 
     public static void start(String board, int amountPlayers, serverHead head) throws Exception {
-        try (var listener = new ServerSocket(58901)) {
+        var listener = new ServerSocket(58901);
             System.out.println("Cheese Cheeckers Server is Running...");
             var pool = Executors.newFixedThreadPool(200);
+
             while (true) {
                 for(int x = 0; x<amountPlayers; x++){
+
                     pool.execute(head.newPlayer(listener.accept()));
+
                 }
             }
-        }catch (Exception e) {
-            System.out.println("NO_PLAYERS");
-        }
+
     }
 }

@@ -1,5 +1,7 @@
 package Client.Frame;
 
+import Client.Client;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -14,10 +16,11 @@ public class Draw_space extends JPanel {
 	private final int sizeOfFieldComamnds;
 	ArrayList<Integer> Movements=new ArrayList<>();
 	int[] tablica;
+	private Client client;
 
 	
-	public Draw_space(Land[][] lands, ArrayList<int[]> Poles, String mycolor,int Players, int sizeOfFieldComamnds) {
-		
+	public Draw_space(Land[][] lands, ArrayList<int[]> Poles, String mycolor, int Players, int sizeOfFieldComamnds, Client client) {
+		this.client=client;
 		this.lands = lands;
 		this.createTables=Poles;
 		this.playerColor=mycolor;
@@ -122,27 +125,43 @@ public class Draw_space extends JPanel {
 		   }
 		}
 		
-	/*void colorDecoder(String color) {
+	Color colorDecoder(String color) {
 		
 		if (color.equals("red")) {
-			this.playerColor = Color.RED;
+			return Color.RED;
 		}
 		else if (color.equals("blue")) {
-			this.playerColor = Color.BLUE;
+			return Color.BLUE;
 		}
 		else if (color.equals("black")) {
-			this.playerColor = Color.BLACK;
+			return Color.BLACK;
 		}
 		else if (color.equals("yellow")) {
-			this.playerColor = Color.YELLOW;
+			return Color.YELLOW;
 		}
 		else if (color.equals("green")) {
-			this.playerColor = Color.GREEN;
+			return Color.GREEN;
 		}
 		else if (color.equals("pink")) {
-			this.playerColor = Color.PINK;
+			return Color.PINK;
+		}else if (color.equals("white")){
+			return Color.WHITE;
 		}
-	}*/
+		return Color.WHITE;
+	}
+	public void sendInfo(){
+		int x,y;
+		x=Movements.get(0);
+		y=Movements.get(1);
+		String Data="MOVE "+x+";"+y;
+		client.writeMessage(Data);
+		Movements.clear();
+	}
+	public void change(int x, int y, String color){
+		lands[x][y].set_color(colorDecoder(color));
+		repaint();
+
+	}
 	
 	class MymouseAdapter extends MouseAdapter {
 		public void mousePressed(MouseEvent e) {
@@ -154,14 +173,16 @@ public class Draw_space extends JPanel {
 						Movements.add(i);
 						Movements.add(j);
 						
-						if(Movements.size()==4){
-							changeColor();
+						if(Movements.size()==2){
+							
+							sendInfo();
 							break;
 						}
-						}
 					}
-			repaint();
+			}
 		}
+		
+		
 		public void changeColor(){
 			int oldX,oldY,newX,newY;
 			Color temporary;

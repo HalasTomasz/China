@@ -16,7 +16,7 @@ public class Player implements Runnable {
 
     public Player(Socket socket, String color, serverHead head) {
         this.socket = socket;
-        this.color= color;
+        this.color = color;
         this.head = head;
     }
 

@@ -9,7 +9,9 @@ public class Rule_OnlyCurrentPlayer extends Rule {
 
     @Override
     boolean check(Player player, String command) {
+        System.out.println("Try " + this.getClass().getSimpleName());
         if (!head.currentPlayer.equals(player)) {
+            System.out.println("Done " + this.getClass().getSimpleName());
             head.newMessageWrite("NOT_YOU", player);
             return true;
         }

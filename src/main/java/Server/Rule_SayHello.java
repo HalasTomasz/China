@@ -1,16 +1,18 @@
 package Server;
 
-public class Rule_WaitAtStart extends Rule {
+public class Rule_SayHello extends Rule {
 
 
-    Rule_WaitAtStart(serverHead head) {
+    Rule_SayHello(serverHead head) {
         super(head);
     }
 
     @Override
     boolean check(Player player, String command) {
+        System.out.println("Try " + this.getClass().getSimpleName());
         if (command.startsWith("WAITING")){
-            head.newMessageWrite("WAIT_FOR_OTHER " + head.board.getClass().getName() + ";" + head.getShape() + ";" + player.getColor() + ";" + head.getAmountPlayers(), player);
+            System.out.println("Done " + this.getClass().getSimpleName());
+            head.newMessageWrite("HELLO " + head.board.getClass().getSimpleName() + ";" + head.getShape() + ";" + player.getColor() + ";" + head.getAmountPlayers(), player);
             return true;
         }
         return false;

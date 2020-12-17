@@ -1,5 +1,7 @@
 package Client.Frame;
 
+import Client.Client;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -9,10 +11,10 @@ public class Draw extends JFrame {
 	private int Width;
 	private Draw_space panel;
 	private Land[][] sizeBoard;
-	private ArrayList<int[]> Poles = new ArrayList<>();
+	private final ArrayList<int[]> Poles = new ArrayList<>();
 	private int filedOfCommand;
 	
-	public Draw(String boardName, String typeOfFigures, String myColor, int Players) {
+	public Draw(String boardName, String typeOfFigures, String myColor, int Players, Client client) {
 		JButton button = new JButton();
 		button.setBackground(Color.RED);
 		button.setOpaque(true);
@@ -24,7 +26,7 @@ public class Draw extends JFrame {
 		setResizable(true);
 		setTitle("Plansza");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		panel = new Draw_space(this.sizeBoard, this.Poles, myColor,Players,filedOfCommand);
+		panel = new Draw_space(this.sizeBoard, this.Poles, myColor,Players,filedOfCommand,client);
 		panel.setBackground(Color.WHITE);
 		panel.add(button);
 		add(panel, BorderLayout.CENTER);
@@ -47,7 +49,10 @@ public class Draw extends JFrame {
 		this.Width = (3 * screenSize.width / 4);
 		setSize(Width, Height);
 	}
+	public void change(int x, int y, String color){
+		panel.change(x, y, color);
 	
+	}
 	public Land[][] fillArray(String type) {
 		SetShapes setShapes = new SetShapes();
 		for (int i = 0; i < sizeBoard.length; i++) {

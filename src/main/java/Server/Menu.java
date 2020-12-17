@@ -5,7 +5,8 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class Menu extends JFrame implements ActionListener{
-	private ArrayList<String> commonAnswers = new ArrayList<>();
+	private final ArrayList<String> commonAnswers = new ArrayList<>();
+	private int sizeOfFirst;
 	JLabel rul, play, boar,shape,mov;
 	JCheckBox rules,rules2,rules3;
 	JCheckBox player,player2,player3,player4;
@@ -14,7 +15,6 @@ public class Menu extends JFrame implements ActionListener{
 	JCheckBox move1,move2,move3;
 	JButton b;
 	Menu(){
-		
 		rul=new JLabel("Zasady:");
 		rul.setBounds(40,100,100,20);
 		rules=new JCheckBox("Zasada n1");
@@ -76,8 +76,7 @@ public class Menu extends JFrame implements ActionListener{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	public void returnArraylist(){
-		//metoda statyczna ktora wezmie arrayliste
-		//return commonAnswers;
+		Mainnnn.maine(commonAnswers,sizeOfFirst);
 	}
 	public void actionPerformed(ActionEvent e){
 		
@@ -138,14 +137,14 @@ public class Menu extends JFrame implements ActionListener{
 		if(play.size()!=1) System.exit(0);
 		if(boar.size()!=1) System.exit(0);
 		if(shape.size()!=1) System.exit(0);
-		if(mov.size()!=1) System.exit(0); // Ile ruchow?
+		if(mov.isEmpty()) System.exit(0);
 		
 		commonAnswers.addAll(rul);
 		commonAnswers.addAll(play);
 		commonAnswers.addAll(boar);
 		commonAnswers.addAll(shape);
 		commonAnswers.addAll(mov);
-		
+		sizeOfFirst=rul.size();
 		returnArraylist();
 		dispose();
 	}
