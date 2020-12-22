@@ -5,7 +5,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class serverHead {
-    String[] colors ={ "red", "yellow", "blue", "black", "purple", "green"};
+    public String[] colors ={ "red", "yellow", "blue", "black", "purple", "green"};
     ArrayList<Rule> bannedRules = new ArrayList<Rule>();
     ArrayList<Rule> rules;
     ArrayList<RuleMove> moves;
@@ -76,14 +76,10 @@ public class serverHead {
     }
     public String getShape() {return shape; }
     public int getAmountPlayers() { return amountPlayers;}
+    public String[] getColors() { return colors;}
 
 
     public void nextPlayer() {
-
-        /*for(RuleMove rulemove: moves){
-            rulemove.restartStats();
-        }
-        addAmountMoves(-howManyMoves());*/
 
         setCurrentX(-1);
         setCurrentY(-1);
@@ -97,11 +93,4 @@ public class serverHead {
             }
         }
     }
-
-    /*public int howManyMoves() {
-        return amountMoves;
-    }
-    public void addAmountMoves(int add){
-        amountMoves = amountMoves + add;
-    }*/
 }

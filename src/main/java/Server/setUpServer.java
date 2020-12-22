@@ -18,6 +18,7 @@ public class setUpServer {
         listMove.add(new RuleMove_NoActiveField(game, board));
         listMove.add(new RuleMove_SkipTurn(game, board));
         listMove.add(new RuleMove_SimpleWalk(game, board));
+        listMove.add(new RuleMove_SimpleJump(game, board));
         String shape = "Circle";
 
 

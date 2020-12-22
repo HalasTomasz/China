@@ -6,16 +6,10 @@ public abstract class RuleMove extends Rule {
     int new_y;
     LogicBoard board;
 
-   /* int old_x;
-    int old_y;
-    int whenMoved;
-    int howManyTimesUsed;*/
-
     RuleMove(serverHead head, LogicBoard board) {
         super(head);
         this.board = board;
     }
-
 
 
     @Override
@@ -40,25 +34,13 @@ public abstract class RuleMove extends Rule {
     void doMove(){
         board.setFieldColor(new_x, new_y, head.currentPlayer.getColor());
         board.setFieldColor(head.currentX, head.currentY, "white");
-        for (Player player: head.getPlayers()) {
-            head.newMessageWrite("CHANGE " + new_x + ";" + new_y + ";" + head.currentPlayer.getColor(), player);
-            head.newMessageWrite("CHANGE " + head.currentX + ";" + head.currentY + ";" + "white", player);
+        for (Player playerr: head.getPlayers()) {
+            head.newMessageWrite("CHANGE " + new_x + ";" + new_y + ";" + head.currentPlayer.getColor(), playerr);
+            head.newMessageWrite("CHANGE " + head.currentX + ";" + head.currentY + ";" + "white", playerr);
         }
-       /* old_x = head.getCurrentX();
-        old_y = head.getCurrentY();*/
+
         head.setCurrentX(new_x);
         head.setCurrentY(new_y);
-        /*head.addAmountMoves(1);
-        howManyTimesUsed++;
-        whenMoved = head.howManyMoves();*/
+
     }
-  /*  void restartStats(){
-        int old_x = -1;
-        int old_y = -1;
-        int whenMoved = 0;
-        int howManyTimesUsed = 0;
-    }*/
-
-
-
 }
