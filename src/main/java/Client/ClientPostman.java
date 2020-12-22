@@ -38,11 +38,11 @@ public class ClientPostman {
     }
 
     public void waitForNewMessage() throws Exception {
+
         try {
-            var response = in.nextLine();
 
             while (in.hasNextLine()) {
-                response = in.nextLine();
+                var response = in.nextLine();
                 client.getResponse(response);;
             }
             out.println("QUIT");

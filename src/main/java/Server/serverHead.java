@@ -33,6 +33,8 @@ public class serverHead {
     }
 
     public Runnable newPlayer(Socket accept) {
+
+
         if (players.size() < amountPlayers) {
             players.add(new Player(accept, colors[players.size()], this));
             if (players.size() == 1){

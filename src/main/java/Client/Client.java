@@ -17,7 +17,6 @@ public class Client {
     public Client(String serverAddress) throws Exception {
 
         postman = new ClientPostman(serverAddress, this);
-        System.out.println(postman != null);
         postman.takeWelcomeMessage();
         postman.waitForNewMessage();
 
@@ -42,7 +41,6 @@ public class Client {
         else if( response.startsWith("CHANGE")){
             String[] tmp = response.substring(7).split(";");
             try{
-                System.out.println(tmp[0] +"---" + tmp[1]+"---" + tmp[2]);
                 gui.change(Integer.parseInt(tmp[0]), Integer.parseInt(tmp[1]), tmp[2]);
             }catch(Exception e){
                 System.out.println("BAD_DATA");
@@ -51,7 +49,6 @@ public class Client {
 
     }
     public void writeMessage(String message){
-        System.out.println("TO SERVER: " + message);
         postman.sendMessage(message);
     }
 
