@@ -14,16 +14,18 @@ public class setUpServer {
         listRule.add(new Rule_OnlyCurrentPlayer(game));
 
 
+
         ArrayList<RuleMove> listMove = new ArrayList<>();
         listMove.add(new RuleMove_IsNotMyChecker(game, board));
         listMove.add(new RuleMove_NoActiveField(game, board));
         listMove.add(new RuleMove_SkipTurn(game, board));
         listMove.add(new RuleMove_SimpleWalk(game, board));
         listMove.add(new RuleMove_SimpleJump(game, board));
+        listRule.addAll(listMove);
         String shape = "Circle";
 
 
-        game.start(board, 2, listRule, listMove, "Circle");
+        game.start(board, 2, listRule, "Circle");
 
     }
 }

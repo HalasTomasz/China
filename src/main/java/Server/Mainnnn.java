@@ -27,7 +27,7 @@ public class Mainnnn {
 
 
 		try {
-			game.start(board, 2, listRule, listMove, shape);
+			game.start(board, 2, listRule, shape);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

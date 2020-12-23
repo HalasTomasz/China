@@ -1,17 +1,16 @@
 package Server;
 
-import java.lang.reflect.Constructor;
 import java.net.Socket;
 import java.util.ArrayList;
 
 public class serverHead {
     public String[] colors ={ "red", "yellow", "blue", "black", "purple", "green"};
     ArrayList<Rule> bannedRules = new ArrayList<Rule>();
-    ArrayList<Rule> rules;
-    ArrayList<RuleMove> moves;
     String shape;
     ArrayList<Player> players = new ArrayList<Player>();
     LogicBoard board;
+
+    Rule firstRule;
 
     int amountPlayers;
     int currentX = -1;
@@ -20,17 +19,16 @@ public class serverHead {
     Player currentPlayer;
     boolean endFlag;
 
- //   private int amountMoves = 0;
+    public void start(LogicBoard board, int amountPlayers, ArrayList<Rule> listRule, String shape) throws Exception {
+        this.amountPlayers = amountPlayers;
+        this.board = board;
+        this.shape = shape;
+        for(int tmp = 0; tmp < listRule.size()-1; tmp++){
+            listRule.get(tmp).setNextRule(listRule.get(tmp+1));
+        }
+        firstRule = listRule.get(0);
 
-    public void start(LogicBoard board, int amountPlayers, ArrayList<Rule> listRule, ArrayList<RuleMove> listMove, String shape) throws Exception {
-
-            this.amountPlayers = amountPlayers;
-            this.board = board;
-            this.rules = listRule;
-            this.moves = listMove;
-            this.shape = shape;
-
-            serverPostman.start(this.board.getClass().getSimpleName(), amountPlayers, this);
+        serverPostman.start(this.board.getClass().getSimpleName(), amountPlayers, this);
     }
 
     public Runnable newPlayer(Socket accept) {
@@ -47,16 +45,7 @@ public class serverHead {
     }
 
     public synchronized void newMessageRead(Player player, String command) {
-        for(Rule rule : rules) {
-            if(rule.tryCheck(player, command)){
-                return;
-            }
-        }
-        for(RuleMove move : moves) {
-            if(move.tryCheck(player, command)){
-                return;
-            }
-        }
+        firstRule.tryCheck(player, command);
     }
 
     public void newMessageWrite(String message, Player player){
