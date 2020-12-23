@@ -18,6 +18,7 @@ public class serverHead {
     int currentY = -1;
     int currentColor = 0;
     Player currentPlayer;
+    boolean endFlag;
 
  //   private int amountMoves = 0;
 

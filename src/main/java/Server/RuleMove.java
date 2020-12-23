@@ -42,5 +42,11 @@ public abstract class RuleMove extends Rule {
         head.setCurrentX(new_x);
         head.setCurrentY(new_y);
 
+        if(board.hasSbWon() != null) {
+            for(Player player: head.getPlayers()){
+                head.newMessageWrite("WON " + board.hasSbWon(), player);
+            }
+        }
+
     }
 }

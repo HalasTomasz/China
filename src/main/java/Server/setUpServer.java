@@ -9,6 +9,7 @@ public class setUpServer {
         LogicBoard board = new logicBoard_Classical2P();
         listRule.add(new Rule_SayHello(game));
         listRule.add(new Rule_SBLeft(game));
+        listRule.add(new Rule_gameOver(game));
         listRule.add(new Rule_WaitForAll(game));
         listRule.add(new Rule_OnlyCurrentPlayer(game));
 
