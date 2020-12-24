@@ -4,8 +4,8 @@ import static java.lang.Math.abs;
 
 public class RuleMove_SimpleWalk extends RuleMove{
 
-    RuleMove_SimpleWalk(serverHead head, LogicBoard board) {
-        super(head, board);
+    RuleMove_SimpleWalk(serverHead head) {
+        super(head);
     }
 
 

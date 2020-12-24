@@ -78,9 +78,13 @@ public class serverHead {
 
         currentColor = (currentColor + 1) % amountPlayers;
 
+
         for(Player player: players){
             if(player.getColor().equals(colors[currentColor])){
                 currentPlayer = player;
+                for(Player playerr: players) {
+                    newMessageWrite("NOW " + colors[currentColor], playerr);
+                }
                 break;
             }
         }

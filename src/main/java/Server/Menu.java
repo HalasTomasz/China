@@ -5,24 +5,22 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class Menu extends JFrame implements ActionListener{
-	private final ArrayList<String> commonAnswers = new ArrayList<>();
-	private int sizeOfFirst;
+	private ArrayList<String> commonAnswers = new ArrayList<>();
 	JLabel rul, play, boar,shape,mov;
-	JCheckBox rules,rules2,rules3;
+	JCheckBox rules;
 	JCheckBox player,player2,player3,player4;
-	JCheckBox board1,board2;
+	JCheckBox board1;
 	JCheckBox shapes1,shapes2;
-	JCheckBox move1,move2,move3;
+	JCheckBox move1;
 	JButton b;
-	Menu(){
+	serverHead game;
+
+	Menu(serverHead game){
+		this.game = game;
 		rul=new JLabel("Zasady:");
 		rul.setBounds(40,100,100,20);
-		rules=new JCheckBox("Zasada n1");
+		rules=new JCheckBox("Podstawowy");
 		rules.setBounds(200,100,150,20);
-		rules2=new JCheckBox("Zasada n2");
-		rules2.setBounds(400,100,150,20);
-		rules3=new JCheckBox("Zasada n3");
-		rules3.setBounds(600,100,150,20);
 		
 		play=new JLabel("Gracze:");
 		play.setBounds(40,200,100,20);
@@ -39,8 +37,6 @@ public class Menu extends JFrame implements ActionListener{
 		boar.setBounds(40,300,100,20);
 		board1=new JCheckBox("Classical");
 		board1.setBounds(200,300,150,20);
-		board2=new JCheckBox("Kwadrat");
-		board2.setBounds(400,300,150,20);
 		
 		shape=new JLabel("Ksztalt pol:");
 		shape.setBounds(40,400,100,20);
@@ -51,22 +47,18 @@ public class Menu extends JFrame implements ActionListener{
 		
 		mov=new JLabel("Ruch:");
 		mov.setBounds(40,500,100,20);
-		move1=new JCheckBox("Ruch1");
+		move1=new JCheckBox("Ruchy podstawowe");
 		move1.setBounds(200,500,150,20);
-		move2=new JCheckBox("Ruch2");
-		move2.setBounds(400,500,150,20);
-		move3=new JCheckBox("Ruch3");
-		move3.setBounds(400,500,150,20);
 		
 		b=new JButton("Utworz");
 		b.setBounds(500,600,80,30);
 		b.addActionListener(this);
 		
-		add(rul);add(rules);add(rules2);add(rules3);
+		add(rul);add(rules);
 		add(play);add(player);add(player2);add(player3);add(player4);
-		add(boar);add(board1);add(board2);
+		add(boar);add(board1);
 		add(shape);add(shapes1);add(shapes2);
-		add(mov);add(move1);add(move2);add(move3);
+		add(mov);add(move1);
 		add(b);
 		
 		setSize(1000,680);
@@ -75,45 +67,40 @@ public class Menu extends JFrame implements ActionListener{
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
-	public void returnArraylist(){
-		Mainnnn.maine(commonAnswers,sizeOfFirst);
-	}
+
+
+
 	public void actionPerformed(ActionEvent e){
 		
-		ArrayList<String> rul = new ArrayList<>();
-		ArrayList<String> play = new ArrayList<>();
-		ArrayList<String> boar = new ArrayList<>();
+		ArrayList<Rule> listRule = new ArrayList<>();
+		int howManyPlayers = 2;
+		ArrayList<LogicBoard> whatsBoard = new ArrayList<>();
 		ArrayList<String> shape = new ArrayList<>();
-		ArrayList<String> mov = new ArrayList<>();
+		ArrayList<RuleMove> listMove = new ArrayList<>();
 		
 		if(rules.isSelected()){
-			rul.add("Zasada nr1");
-		}
-		if(rules2.isSelected()){
-			rul.add("Zasada nr2");
-		}
-		if(rules3.isSelected()){
-			rul.add("Zasada nr3");
+			listRule.add(new Rule_SayHello(game));
+			listRule.add(new Rule_SBLeft(game));
+			listRule.add(new Rule_gameOver(game));
+			listRule.add(new Rule_WaitForAll(game));
+			listRule.add(new Rule_OnlyCurrentPlayer(game));
 		}
 		
 		if(player.isSelected()){
-			play.add("2");
+			howManyPlayers = 2;
 		}
 		if(player2.isSelected()){
-			play.add("3");
+			howManyPlayers = 3;
 		}
 		if(player3.isSelected()){
-			play.add("4");
+			howManyPlayers = 4;
 		}
 		if(player4.isSelected()){
-			play.add("6");
+			howManyPlayers = 6;;
 		}
 		
 		if(board1.isSelected()){
-			boar.add("Classical");
-		}
-		if(board2.isSelected()){
-			boar.add("Square");
+			whatsBoard.add(new logicBoard_Classical2P());
 		}
 		
 		if(shapes1.isSelected()){
@@ -124,28 +111,21 @@ public class Menu extends JFrame implements ActionListener{
 		}
 		
 		if(move1.isSelected()){
-			mov.add("Ruch1");
+			listMove.add(new RuleMove_IsNotMyChecker(game));
+			listMove.add(new RuleMove_NoActiveField(game));
+			listMove.add(new RuleMove_SkipTurn(game));
+			listMove.add(new RuleMove_SimpleWalk(game));
+			listMove.add(new RuleMove_SimpleJump(game));
 		}
-		if(move2.isSelected()){
-			mov.add("Ruch2");
-		}
-		if(move3.isSelected()){
-			mov.add("Ruch3");
-		}
-		
-		if(rul.isEmpty()) System.exit(0);
-		if(play.size()!=1) System.exit(0);
-		if(boar.size()!=1) System.exit(0);
+
+		if(listRule.isEmpty()) System.exit(0);
+		if(whatsBoard.size()!=1) System.exit(0);
 		if(shape.size()!=1) System.exit(0);
-		if(mov.isEmpty()) System.exit(0);
-		
-		commonAnswers.addAll(rul);
-		commonAnswers.addAll(play);
-		commonAnswers.addAll(boar);
-		commonAnswers.addAll(shape);
-		commonAnswers.addAll(mov);
-		sizeOfFirst=rul.size();
-		returnArraylist();
+		if(listMove.isEmpty()) System.exit(0);
+
+		listRule.addAll(listMove);
 		dispose();
+		setUp.createNewGame(whatsBoard.get(0), howManyPlayers, shape.get(0), listRule, listMove);
+
 	}
 }

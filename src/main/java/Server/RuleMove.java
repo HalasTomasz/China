@@ -6,8 +6,11 @@ public abstract class RuleMove extends Rule {
     int new_y;
     LogicBoard board;
 
-    RuleMove(serverHead head, LogicBoard board) {
+    RuleMove(serverHead head) {
         super(head);
+    }
+
+    void init(LogicBoard board){
         this.board = board;
     }
 

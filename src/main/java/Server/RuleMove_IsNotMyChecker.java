@@ -2,8 +2,8 @@ package Server;
 
 public class RuleMove_IsNotMyChecker extends RuleMove {
 
-    RuleMove_IsNotMyChecker(serverHead head, LogicBoard board) {
-        super(head, board);
+    RuleMove_IsNotMyChecker(serverHead head) {
+        super(head);
     }
 
     @Override

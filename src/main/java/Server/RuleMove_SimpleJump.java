@@ -6,8 +6,8 @@ import static java.lang.Math.floor;
 public class RuleMove_SimpleJump extends RuleMove{
 
 
-    RuleMove_SimpleJump(serverHead head, LogicBoard board) {
-        super(head, board);
+    RuleMove_SimpleJump(serverHead head) {
+        super(head);
     }
 
     private boolean isBeetwen(int closeToCheck){

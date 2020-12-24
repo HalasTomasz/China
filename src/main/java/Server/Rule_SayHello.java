@@ -12,7 +12,7 @@ public class Rule_SayHello extends Rule {
         System.out.println("Try " + this.getClass().getSimpleName());
         if (command.startsWith("WAITING")){
             System.out.println("Done " + this.getClass().getSimpleName());
-            head.newMessageWrite("HELLO " + head.board.getClass().getSimpleName() + ";" + head.getShape() + ";" + player.getColor() + ";" + head.getAmountPlayers(), player);
+            head.newMessageWrite("HELLO " + head.board.getClass().getSimpleName() + ";" + head.getShape() + ";" + player.getColor() + ";" + head.getAmountPlayers() + ";" + head.colors[0], player);
             return true;
         }
         return false;

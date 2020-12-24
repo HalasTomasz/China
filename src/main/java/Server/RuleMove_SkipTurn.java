@@ -3,8 +3,8 @@ package Server;
 public class RuleMove_SkipTurn extends RuleMove {
 
 
-    RuleMove_SkipTurn(serverHead head, LogicBoard board) {
-        super(head, board);
+    RuleMove_SkipTurn(serverHead head) {
+        super(head);
     }
 
     @Override
