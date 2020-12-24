@@ -2,7 +2,7 @@ package Server;
 
 import java.util.ArrayList;
 
-public class setUp {
+public class setUpServer {
 
 	private static serverHead game = new serverHead();;
 	public static void createNewGame(LogicBoard board, int howManyPlayers, String shape, ArrayList<Rule> listRule, ArrayList<RuleMove> listMove){

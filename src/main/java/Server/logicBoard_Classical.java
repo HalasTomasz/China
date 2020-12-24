@@ -23,13 +23,13 @@ public abstract class logicBoard_Classical extends LogicBoard {
                 }
             }
 
-            decoder(array, "white");
-            decoder(array2, "white");
-            decoder(houseUp, "white");
-            decoder(houseDown, "white");
-            decoder(houseUpLeft, "white");
-            decoder(houseUpRight, "white");
-            decoder(houseDownLeft, "white");
-            decoder(houseDownRight, "white");
+            decoder(array, "white", null);
+            decoder(array2, "white", null);
+            decoder(houseUp, "white", null);
+            decoder(houseDown, "white", null);
+            decoder(houseUpLeft, "white", null);
+            decoder(houseUpRight, "white", null);
+            decoder(houseDownLeft, "white", null);
+            decoder(houseDownRight, "white", null);
     }
 }

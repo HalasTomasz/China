@@ -4,8 +4,8 @@ public class logicBoard_Classical2P extends logicBoard_Classical {
 
     logicBoard_Classical2P(){
         super();
-        decoder(houseUp, "red");
-        decoder(houseDown, "yellow");
+        decoder(houseUp, "red", "yellow");
+        decoder(houseDown, "yellow", "red");
     }
 
     @Override

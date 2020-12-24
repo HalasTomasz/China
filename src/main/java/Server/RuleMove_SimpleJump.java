@@ -59,12 +59,7 @@ public class RuleMove_SimpleJump extends RuleMove{
         }
 
 
-
-
-
-
-
-
+        System.out.println("Failed " + this.getClass().getSimpleName());
         return false;
     }
 }

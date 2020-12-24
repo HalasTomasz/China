@@ -10,9 +10,11 @@ public class RuleMove_NoActiveField extends RuleMove {
     protected boolean canDo(Player player) {
         System.out.println("Try " + this.getClass().getSimpleName());
         if (head.getCurrentX() == -1 && head.getCurrentY() == -1) {
+            if(isActivePlayerCheecker(player)){
+                return true;
+            }
             if (board.getFieldColor(new_x, new_y) == "white"){
                 System.out.println("Done " + "Cliced white without active");
-
             } else {
                 System.out.println("Done " + this.getClass().getSimpleName());
                 head.setCurrentX(new_x);

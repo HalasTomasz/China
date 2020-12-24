@@ -111,11 +111,11 @@ public class Menu extends JFrame implements ActionListener{
 		}
 		
 		if(move1.isSelected()){
-			listMove.add(new RuleMove_IsNotMyChecker(game));
 			listMove.add(new RuleMove_NoActiveField(game));
 			listMove.add(new RuleMove_SkipTurn(game));
 			listMove.add(new RuleMove_SimpleWalk(game));
 			listMove.add(new RuleMove_SimpleJump(game));
+			listMove.add(new RuleMove_ToHause(game));
 		}
 
 		if(listRule.isEmpty()) System.exit(0);
@@ -125,7 +125,7 @@ public class Menu extends JFrame implements ActionListener{
 
 		listRule.addAll(listMove);
 		dispose();
-		setUp.createNewGame(whatsBoard.get(0), howManyPlayers, shape.get(0), listRule, listMove);
+		setUpServer.createNewGame(whatsBoard.get(0), howManyPlayers, shape.get(0), listRule, listMove);
 
 	}
 }

@@ -4,9 +4,12 @@ public class logicBoard_Classical3P extends logicBoard_Classical {
 
     logicBoard_Classical3P(){
         super();
-        decoder(houseUp, "red");
-        decoder(houseDownLeft, "yellow");
-        decoder(houseDownRight, "blue");
+        decoder(houseUp, "red", null);
+        decoder(houseDownLeft, "yellow", null);
+        decoder(houseDownRight, "blue", null);
+        decoder(houseUpLeft, "white", "blue");
+        decoder(houseUpRight, "white", "yellow");
+        decoder(houseDown, "white", "red");
     }
 
     @Override

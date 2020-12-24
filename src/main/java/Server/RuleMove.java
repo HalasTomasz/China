@@ -50,6 +50,34 @@ public abstract class RuleMove extends Rule {
                 head.newMessageWrite("WON " + board.hasSbWon(), player);
             }
         }
+    }
 
+    void switchFields(){
+        String tmpColor = board.getFieldColor(new_x, new_y);
+        board.setFieldColor(head.currentX, head.currentY, board.getFieldColor(new_x, new_y));
+        board.setFieldColor(new_x, new_y, head.currentPlayer.getColor());
+
+        for (Player player: head.getPlayers()) {
+            head.newMessageWrite("CHANGE " + new_x + ";" + new_y + ";" + head.currentPlayer.getColor(), player);
+            head.newMessageWrite("CHANGE " + head.currentX + ";" + head.currentY + ";" + tmpColor, player);
+        }
+
+        head.setCurrentX(new_x);
+        head.setCurrentY(new_y);
+
+        if(board.hasSbWon() != null) {
+            for(Player player: head.getPlayers()){
+                head.newMessageWrite("WON " + board.hasSbWon(), player);
+            }
+        }
+    }
+
+    protected boolean isActivePlayerCheecker(Player player) {
+
+        if(head.currentX == -1 && board.getFieldColor(new_x, new_y) != player.getColor() && board.getFieldColor(new_x, new_y) != "white"){
+            head.newMessageWrite("NOT_YOUR_CHECKER", player);
+            return true;
+        }
+        return false;
     }
 }
