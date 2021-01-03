@@ -1,8 +1,16 @@
 package Client.Frame;
 
+/**
+ * Klasa CreateBoard uzywa factory pattern
+ */
 public class CreateBoard {
 	
-	 static BoardMethods BoardPropetis(String name){
+	/**
+	 * Metoda boardProperties na podstawie
+	 * @param name nazwa planszy
+	 * @return zwraca gotowa plansze (wraz z Polami oraz Domkami)
+	 */
+	 static BoardMethods boardProperties(String name){
 		
 		if(name.equals("Classical")){
 			return new Classical(13,17);

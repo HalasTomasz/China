@@ -1,6 +1,6 @@
 package Server;
 
-public class Rule_OnlyCurrentPlayer extends Rule {
+public class Rule_OnlyCurrentPlayer extends rule {
 
 
     Rule_OnlyCurrentPlayer(serverHead head) {
@@ -8,7 +8,7 @@ public class Rule_OnlyCurrentPlayer extends Rule {
     }
 
     @Override
-    boolean check(Player player, String command) {
+    boolean check(player player, String command) {
         System.out.println("Try " + this.getClass().getSimpleName());
         if (!head.currentPlayer.equals(player)) {
             System.out.println("Done " + this.getClass().getSimpleName());

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class setUpServer {
 
 	private static serverHead game = new serverHead();;
-	public static void createNewGame(LogicBoard board, int howManyPlayers, String shape, ArrayList<Rule> listRule, ArrayList<RuleMove> listMove){
+	public static void createNewGame(logicBoard board, int howManyPlayers, String shape, ArrayList<rule> listRule, ArrayList<RuleMove> listMove){
 
 		for(RuleMove ruleMove: listMove){
 			ruleMove.init(board);
@@ -19,6 +19,6 @@ public class setUpServer {
 	}
 
 	public static void openMenuWindow(){
-		new Menu(game);
+		new menu(game);
 	}
 }

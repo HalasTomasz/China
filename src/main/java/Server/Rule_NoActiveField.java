@@ -1,13 +1,13 @@
 package Server;
 
-public class Rule_NoActiveField extends Rule{
+public class Rule_NoActiveField extends rule {
 
     Rule_NoActiveField(serverHead head) {
         super(head);
     }
 
     @Override
-    boolean check(Player player, String command) {
+    boolean check(player player, String command) {
         System.out.println("Try " + this.getClass().getSimpleName());
         if (command.startsWith("MOVE") && head.getCurrentX() == -1 && head.getCurrentY() == -1) {
             System.out.println("Done " + this.getClass().getSimpleName());

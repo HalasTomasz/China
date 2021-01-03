@@ -1,11 +1,8 @@
 package Server;
 
-import java.awt.*;
-import java.util.ArrayList;
+public abstract class logicBoard {
 
-public abstract class LogicBoard {
-
-    Field[][] fields;
+    field[][] fields;
 
 
     protected void decoder(int[] createTables, String color, String winningHause) {

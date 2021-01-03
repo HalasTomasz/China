@@ -1,6 +1,6 @@
 package Server;
 
-public class Rule_SayHello extends Rule {
+public class Rule_SayHello extends rule {
 
 
     Rule_SayHello(serverHead head) {
@@ -8,7 +8,7 @@ public class Rule_SayHello extends Rule {
     }
 
     @Override
-    boolean check(Player player, String command) {
+    boolean check(player player, String command) {
         System.out.println("Try " + this.getClass().getSimpleName());
         if (command.startsWith("WAITING")){
             System.out.println("Done " + this.getClass().getSimpleName());

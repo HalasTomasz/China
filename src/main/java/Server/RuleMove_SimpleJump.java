@@ -1,7 +1,6 @@
 package Server;
 
 import static java.lang.Math.abs;
-import static java.lang.Math.floor;
 
 public class RuleMove_SimpleJump extends RuleMove{
 
@@ -23,7 +22,7 @@ public class RuleMove_SimpleJump extends RuleMove{
     }
 
     @Override
-    protected boolean canDo(Player player) {
+    protected boolean canDo(player player) {
         System.out.println("Try " + this.getClass().getSimpleName());
 
         if(board.getFieldColor(new_x, new_y).equals("white")){

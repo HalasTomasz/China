@@ -8,11 +8,9 @@ import java.net.Socket;
 
 
 public class Client {
-
-
+    
     private GUI gui;
     private ClientPostman postman;
-
 
     public Client(String serverAddress) throws Exception {
 
@@ -21,23 +19,18 @@ public class Client {
         postman.waitForNewMessage();
 
     }
-
-
-
-
+    
     public void getResponse(String response){
         System.out.println("FROM SERVER: " + response);
         if(response.equals("WAIT_FOR_ALL")){
-
+            gui.waitForMove();
         }
         else if(response.equals("NOT_YOU")){
-
+            gui.notYou();
         }
         else if(response.equals("SB_LEFT")){
-            //jakos ladniej wyjdz
-            System.exit(0);
+            gui.left();
         }
-
         else if( response.startsWith("CHANGE")){
             String[] tmp = response.substring(7).split(";");
             try{
@@ -46,8 +39,27 @@ public class Client {
                 System.out.println("BAD_DATA");
             }
         }
-
+        else if(response.startsWith("WON")){
+            gui.winner();
+        }
+        else if (response.startsWith("ACTIVE")){
+            String[] tmp2 = response.substring(7).split(";");
+            try{
+                gui.change(Integer.parseInt(tmp2[0]), Integer.parseInt(tmp2[1]), "orange");
+            }catch(Exception e){
+                System.out.println("BAD_DATA");
+            }
+        }
+        else if(response.startsWith("NOT_YOUR")){
+            gui.notChecker();
+        }
+        else if(response.startsWith("NOW")){
+            String[] tmp3 = response.substring(3).split(" ");
+            gui.changePlayer(tmp3[1]);
+        }
+       
     }
+    
     public void writeMessage(String message){
         postman.sendMessage(message);
     }

@@ -11,7 +11,7 @@ public class RuleMove_SimpleWalk extends RuleMove{
 
 
     @Override
-    protected boolean canDo(Player player) {
+    protected boolean canDo(player player) {
         System.out.println("Try " + this.getClass().getSimpleName());
         if(board.getFieldColor(new_x, new_y).equals("white")){
             if(head.getCurrentX() % 2 == 0){
