@@ -1,17 +1,15 @@
 package Client;
 
-import Client.Frame.GUI;
-
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
 public class ClientPostman {
 
-    private Socket socket;
-    private Scanner in;
-    private PrintWriter out;
-    private Client client;
+    private final Socket socket;
+    private final Scanner in;
+    private final PrintWriter out;
+    private final Client client;
 
     public ClientPostman(String serverAddress, Client client) throws Exception {
 
@@ -43,7 +41,7 @@ public class ClientPostman {
 
             while (in.hasNextLine()) {
                 var response = in.nextLine();
-                client.getResponse(response);;
+                client.getResponse(response);
             }
             out.println("QUIT");
         } catch (Exception e) {
@@ -53,7 +51,11 @@ public class ClientPostman {
 
         }
     }
-
+    
+    /**
+     * Wyslij wiadomosc do sewera
+     * @param message - message
+     */
     public void sendMessage(String message){
         System.out.println("TO SERVER: " + message);
         out.println(message);

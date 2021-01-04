@@ -1,30 +1,47 @@
 package Client.Frame;
 
+import java.util.ArrayList;
+
+/**
+ * Klasa Clasical rozszerza Board
+ */
 public class RectangleBoard extends Board {
+	
+	/**
+	 * W konstruktorze wywoluje metody odpowiedzialne na "zbudowanie planszy"
+	 * @param sizeX - dlugosc planszy
+	 * @param sizeY - szerokosc planszy
+	 */
 	public RectangleBoard(int sizeX, int sizeY){
 		setSizeBoard(sizeX,sizeY);
 		addHouses();
 	}
 	
+	/**
+	 * Dodaje domki do jeden wspolnej Arraylist
+	 * @param house ulokowane domki w tablicy int
+	 */
 	@Override
 	public void setHouses(int[] house) {
 		houses.add(house);
 	}
+	
+	/**
+	 * Na podstawie x i y tworze tyle pol i zapisuje w sizeBoard
+	 * @param x dlugosc
+	 * @param y szerokosc
+	 */
 	@Override
 	public void setSizeBoard(int x, int y){
 		sizeBoard = new Land[y][x];
 	}
+	
+	/**
+	 * Dodaje domki
+	 * inicjalizuje Arryliste
+	 */
 	@Override
 	public void addHouses() {
-		int[] house1 ={3,4,6,3,7,2,5,1,8};
-		int[] house2 ={3,4,2,3,1,2,3,1,0};
-		int[] house3 ={3,4,11,3,10,2,12,1,9};
-		int[] house4 ={3,4,11,3,10,2,12,1,9};
-		
-		setHouses(house1);
-		setHouses(house2);
-		setHouses(house3);
-		setHouses(house4);
-		
+		houses = new ArrayList<>();
 	}
 }

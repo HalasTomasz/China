@@ -2,12 +2,18 @@ package Client.Frame;
 
 import java.util.ArrayList;
 
-public class SquareBoard implements DrawBoard{
+/**
+ * Klasa SquareBoard implementuje DrawNeutralBoard
+ */
+public class SquareBoard implements DrawNeutralBoard {
 	
+	/**
+	 * Zwraca uklad pol neutralnych
+	 * jako ArrayList<int []>
+	 */
 	@Override
 	public ArrayList<int []> returnTables()  {
-		ArrayList<int[]> createTables = new ArrayList<>();
-		return createTables;
+		return new ArrayList<>();
 	}
 	
 }
