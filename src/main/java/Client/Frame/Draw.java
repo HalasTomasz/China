@@ -36,6 +36,7 @@ public class Draw extends JFrame {
 		
 		setSizes(); // ustawiam rozmiar ramki
 		prepareData(boardName,typeOfFigures); // ustawiam typ planszy oraz typ pol (figura)
+
 		
 		setLocationByPlatform(true);
 		setResizable(true);
@@ -66,6 +67,20 @@ public class Draw extends JFrame {
 		add(panel, BorderLayout.CENTER); // Dodaje panel
 	}
 	
+	public void changePlayer(String color){
+	button2.setBackground(panel.colorDecoder(color));
+	}
+	private void prepare(String Boardname, String typeOfFigures){
+		
+		this.sizeBoard = CreateBoard.boardProperties(Boardname).giveSize();
+		this.sizeBoard = fillArray(typeOfFigures);
+		
+		this.Poles.addAll(SetBoardShape.returnBoardShape(Boardname).returnTables());
+		filedOfCommand=this.Poles.size();
+		this.Poles.addAll(CreateBoard.boardProperties(Boardname).giveHouses());
+
+	}
+	
 	/**
 	 * Ustawiam rozmiar ramki
 	 * zmienne przypisuje do
@@ -78,6 +93,7 @@ public class Draw extends JFrame {
 		this.Width = (3 * screenSize.width / 4);
 		setSize(Width, Height);
 	}
+
 	
 	/**
 	 * Pobieram gotowe juz pola z CreateBoard
@@ -94,6 +110,10 @@ public class Draw extends JFrame {
 		this.createTables.addAll(SetBoardShape.returnBoardShape(boardName).returnTables()); // Pola neutralne
 		filedOfCommand=this.createTables.size();
 		this.createTables.addAll(CreateBoard.boardProperties(boardName).giveHouses()); // Domki
+  
+	public void change(int x, int y, String color){
+		panel.change(x, y, color);
+		
 	}
 	
 	/**
@@ -112,7 +132,7 @@ public class Draw extends JFrame {
 		}
 		return sizeBoard;
 	}
-	
+
 	/**
 	 * Zmieniam rozmiar ramki
 	 * w wyniku czego zmieniam rozmiar Pol
@@ -128,6 +148,7 @@ public class Draw extends JFrame {
 					sizeBoard[i][j].changeShape((float) (Width / 6) + (float) j * Width / 19, (float) Height / 20 + (float) i * Height / 20, (float) Width / 21, (float) Height / 20);
 			}
 		}
+
 	}
 	
 	/**

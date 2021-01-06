@@ -1,7 +1,7 @@
 package Server;
 
 
-public abstract class logicBoard_Classical extends LogicBoard {
+public abstract class logicBoard_Classical extends logicBoard {
 
     int[] houseUp ={1, 0, 4, 0, 6, 1, 7, 2, 5, 3, 8};
     int[] houseDown ={0, 16, 13, 16, 6, 15, 7, 14, 5, 13, 8};
@@ -15,11 +15,11 @@ public abstract class logicBoard_Classical extends LogicBoard {
 
         logicBoard_Classical(){
 
-            fields = new Field[17][13];
+            fields = new field[17][13];
 
             for(int x = 0; x<17; x++) {
                 for (int y = 0; y<13; y++) {
-                    fields[x][y] = new Field();
+                    fields[x][y] = new field();
                 }
             }
 

@@ -1,7 +1,7 @@
 package Server;
 
 
-public class Field {
+public class field {
     String color = null;
     String colorToWin = null;
     public String getColor() { return color; }

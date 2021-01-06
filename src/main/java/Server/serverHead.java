@@ -5,21 +5,21 @@ import java.util.ArrayList;
 
 public class serverHead {
     public String[] colors ={ "red", "yellow", "blue", "black", "purple", "green"};
-    ArrayList<Rule> bannedRules = new ArrayList<Rule>();
+    ArrayList<rule> bannedRules = new ArrayList<rule>();
     String shape;
-    ArrayList<Player> players = new ArrayList<Player>();
-    LogicBoard board;
+    ArrayList<player> players = new ArrayList<player>();
+    logicBoard board;
 
-    Rule firstRule;
+    rule firstRule;
 
     int amountPlayers;
     int currentX = -1;
     int currentY = -1;
     int currentColor = 0;
-    Player currentPlayer;
+    player currentPlayer;
     boolean endFlag;
 
-    public void start(LogicBoard board, int amountPlayers, ArrayList<Rule> listRule, String shape) throws Exception {
+    public void start(logicBoard board, int amountPlayers, ArrayList<rule> listRule, String shape) throws Exception {
         this.amountPlayers = amountPlayers;
         this.board = board;
         this.shape = shape;
@@ -35,7 +35,7 @@ public class serverHead {
 
 
         if (players.size() < amountPlayers) {
-            players.add(new Player(accept, colors[players.size()], this));
+            players.add(new player(accept, colors[players.size()], this));
             if (players.size() == 1){
                 currentPlayer = players.get(0);
             }
@@ -44,11 +44,11 @@ public class serverHead {
         return null;
     }
 
-    public synchronized void newMessageRead(Player player, String command) {
+    public synchronized void newMessageRead(player player, String command) {
         firstRule.tryCheck(player, command);
     }
 
-    public void newMessageWrite(String message, Player player){
+    public void newMessageWrite(String message, player player){
         player.sendMessage(message);
     }
     public int getCurrentX(){
@@ -63,7 +63,7 @@ public class serverHead {
     public void setCurrentY(int newY){
         currentY = newY;
     }
-    public ArrayList<Player> getPlayers(){
+    public ArrayList<player> getPlayers(){
         return players;
     }
     public String getShape() {return shape; }
@@ -79,10 +79,10 @@ public class serverHead {
         currentColor = (currentColor + 1) % amountPlayers;
 
 
-        for(Player player: players){
+        for(Server.player player: players){
             if(player.getColor().equals(colors[currentColor])){
                 currentPlayer = player;
-                for(Player playerr: players) {
+                for(Server.player playerr: players) {
                     newMessageWrite("NOW " + colors[currentColor], playerr);
                 }
                 break;

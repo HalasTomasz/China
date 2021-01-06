@@ -1,12 +1,12 @@
 package Server;
 
-public abstract class Rule {
+public abstract class rule {
     serverHead head;
-    Rule nextRule;
-    Rule(serverHead head) {
+    rule nextRule;
+    rule(serverHead head) {
         this.head = head;
     }
-     boolean tryCheck(Player player, String command){
+     boolean tryCheck(player player, String command){
         if (head.bannedRules.contains(this)){
             return nextRule.tryCheck(player, command);
         }
@@ -20,9 +20,9 @@ public abstract class Rule {
             }
         }
     }
-    abstract boolean check(Player player, String command);
+    abstract boolean check(player player, String command);
 
-    public void setNextRule(Rule nextRule){
+    public void setNextRule(rule nextRule){
         this.nextRule = nextRule;
     }
 }

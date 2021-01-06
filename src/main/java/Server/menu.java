@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class Menu extends JFrame implements ActionListener{
+public class menu extends JFrame implements ActionListener{
 	private ArrayList<String> commonAnswers = new ArrayList<>();
 	JLabel rul, play, boar,shape,mov;
 	JCheckBox rules;
@@ -15,7 +15,7 @@ public class Menu extends JFrame implements ActionListener{
 	JButton b;
 	serverHead game;
 
-	Menu(serverHead game){
+	menu(serverHead game){
 		this.game = game;
 		rul=new JLabel("Zasady:");
 		rul.setBounds(40,100,100,20);
@@ -72,9 +72,9 @@ public class Menu extends JFrame implements ActionListener{
 
 	public void actionPerformed(ActionEvent e){
 		
-		ArrayList<Rule> listRule = new ArrayList<>();
+		ArrayList<rule> listRule = new ArrayList<>();
 		int howManyPlayers = 2;
-		ArrayList<LogicBoard> whatsBoard = new ArrayList<>();
+		ArrayList<logicBoard> whatsBoard = new ArrayList<>();
 		ArrayList<String> shape = new ArrayList<>();
 		ArrayList<RuleMove> listMove = new ArrayList<>();
 		
@@ -100,7 +100,20 @@ public class Menu extends JFrame implements ActionListener{
 		}
 		
 		if(board1.isSelected()){
-			whatsBoard.add(new logicBoard_Classical2P());
+			switch (howManyPlayers){
+				case 2:
+					whatsBoard.add(new logicBoard_Classical2P());
+					break;
+				case 3:
+					whatsBoard.add(new logicBoard_Classical3P());
+					break;
+				case 4:
+					whatsBoard.add(new logicBoard_Classical4P());
+					break;
+				case 6:
+					whatsBoard.add(new logicBoard_Classical6P());
+					break;
+			}
 		}
 		
 		if(shapes1.isSelected()){

@@ -12,7 +12,7 @@ public class RuleMove_ToHause extends RuleMove{
 
 
     @Override
-    protected boolean canDo(Player player) {
+    protected boolean canDo(player player) {
         System.out.println("Try " + this.getClass().getSimpleName());
 
         if(abs(head.currentX-new_x) <=1 && abs(head.currentY-new_y) <= 1 && board.getFieldHause(new_x, new_y).equals(player.getColor()) && !board.getFieldColor(new_x, new_y).equals("white") && !board.getFieldColor(new_x, new_y).equals(player.getColor())){

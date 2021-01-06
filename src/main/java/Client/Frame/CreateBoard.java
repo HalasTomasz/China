@@ -10,6 +10,7 @@ public class CreateBoard {
 	 * @param name nazwa planszy
 	 * @return zwraca gotowa plansze (wraz z Polami oraz Domkami)
 	 */
+
 	 public static BoardMethods boardProperties(String name){
 		
 		if(name.equals("Classical")){

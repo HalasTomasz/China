@@ -7,7 +7,7 @@ public class RuleMove_NoActiveField extends RuleMove {
     }
 
     @Override
-    protected boolean canDo(Player player) {
+    protected boolean canDo(player player) {
         System.out.println("Try " + this.getClass().getSimpleName());
         if (head.getCurrentX() == -1 && head.getCurrentY() == -1) {
             if(isActivePlayerCheecker(player)){

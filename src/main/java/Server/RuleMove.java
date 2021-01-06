@@ -1,22 +1,22 @@
 package Server;
 
-public abstract class RuleMove extends Rule {
+public abstract class RuleMove extends rule {
 
     int new_x;
     int new_y;
-    LogicBoard board;
+    logicBoard board;
 
     RuleMove(serverHead head) {
         super(head);
     }
 
-    void init(LogicBoard board){
+    void init(logicBoard board){
         this.board = board;
     }
 
 
     @Override
-    boolean check(Player player, String command){
+    boolean check(player player, String command){
         if (command.startsWith("MOVE")) {
             try {
                 new_x = Integer.parseInt(command.substring(5).split(";")[0]);
@@ -32,12 +32,12 @@ public abstract class RuleMove extends Rule {
 
     }
 
-    protected abstract boolean canDo(Player player);
+    protected abstract boolean canDo(player player);
 
     void doMove(){
         board.setFieldColor(new_x, new_y, head.currentPlayer.getColor());
         board.setFieldColor(head.currentX, head.currentY, "white");
-        for (Player player: head.getPlayers()) {
+        for (Server.player player: head.getPlayers()) {
             head.newMessageWrite("CHANGE " + new_x + ";" + new_y + ";" + head.currentPlayer.getColor(), player);
             head.newMessageWrite("CHANGE " + head.currentX + ";" + head.currentY + ";" + "white", player);
         }
@@ -46,7 +46,7 @@ public abstract class RuleMove extends Rule {
         head.setCurrentY(new_y);
 
         if(board.hasSbWon() != null) {
-            for(Player player: head.getPlayers()){
+            for(Server.player player: head.getPlayers()){
                 head.newMessageWrite("WON " + board.hasSbWon(), player);
             }
         }
@@ -57,7 +57,7 @@ public abstract class RuleMove extends Rule {
         board.setFieldColor(head.currentX, head.currentY, board.getFieldColor(new_x, new_y));
         board.setFieldColor(new_x, new_y, head.currentPlayer.getColor());
 
-        for (Player player: head.getPlayers()) {
+        for (Server.player player: head.getPlayers()) {
             head.newMessageWrite("CHANGE " + new_x + ";" + new_y + ";" + head.currentPlayer.getColor(), player);
             head.newMessageWrite("CHANGE " + head.currentX + ";" + head.currentY + ";" + tmpColor, player);
         }
@@ -66,13 +66,13 @@ public abstract class RuleMove extends Rule {
         head.setCurrentY(new_y);
 
         if(board.hasSbWon() != null) {
-            for(Player player: head.getPlayers()){
+            for(Server.player player: head.getPlayers()){
                 head.newMessageWrite("WON " + board.hasSbWon(), player);
             }
         }
     }
 
-    protected boolean isActivePlayerCheecker(Player player) {
+    protected boolean isActivePlayerCheecker(player player) {
 
         if(head.currentX == -1 && board.getFieldColor(new_x, new_y) != player.getColor() && board.getFieldColor(new_x, new_y) != "white"){
             head.newMessageWrite("NOT_YOUR_CHECKER", player);

@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class Player implements Runnable {
+public class player implements Runnable {
     Socket socket;
     String color;
     serverHead head;
@@ -14,7 +14,7 @@ public class Player implements Runnable {
     Scanner input;
     PrintWriter output;
 
-    public Player(Socket socket, String color, serverHead head) {
+    public player(Socket socket, String color, serverHead head) {
         this.socket = socket;
         this.color = color;
         this.head = head;

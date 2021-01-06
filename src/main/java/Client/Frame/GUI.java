@@ -6,17 +6,21 @@ import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
+
 /**
  * Klasa GUI
  * Players - ilosc graczy
  * Client Client - obiekt Client
  * Draw draw - ramka
  */
+
 public class GUI extends ServerAdapter{
 	
 	private final int Players;
 	private final Client Client;
+
 	private Draw draw;
+
 	
 	/**
 	 * Tworze ramke i dodaje do niej ComponentListener
@@ -32,6 +36,7 @@ public class GUI extends ServerAdapter{
 		this.Client=client;
 		EventQueue.invokeLater(() ->
 		{
+
 			draw = new Draw(boardName, typeOfFigures, mycolor, this.Players,this); //Ramka
 			draw.addComponentListener(new ComponentAdapter() {
 				public void componentResized(ComponentEvent componentEvent) {
@@ -40,6 +45,11 @@ public class GUI extends ServerAdapter{
 			});
 			draw.setVisible(true); // widocznosc
 		});
+	}
+	@Override
+	public void sendInfo(int x, int y){
+		String Data="MOVE "+x+";"+y;
+		Client.writeMessage(Data);
 	}
 	
 	/**
@@ -81,4 +91,14 @@ public class GUI extends ServerAdapter{
 	public Component returnFrame(){
 		return draw;
 	}
+	
+	@Override
+	public void changePlayer(String color){
+		frame.changePlayer(color);
+	}
+	@Override
+	public Draw returnFrame(){
+		return frame;
+	}
+	
 }
