@@ -1,5 +1,8 @@
 package Server;
 
+/**
+ * abstract for all rules thining about fields
+ */
 public abstract class RuleMove extends rule {
 
     int new_x;
@@ -10,11 +13,21 @@ public abstract class RuleMove extends rule {
         super(head);
     }
 
+    /**
+     * to set about what board should rule think
+     * @param board board to think
+     */
     void init(logicBoard board){
         this.board = board;
     }
 
 
+    /**
+     * if player try to move and good data think can i done sth
+     * @param player who done action
+     * @param command what action
+     * @return
+     */
     @Override
     boolean check(player player, String command){
         if (command.startsWith("MOVE")) {
@@ -32,8 +45,16 @@ public abstract class RuleMove extends rule {
 
     }
 
+    /**
+     * specifc thinnking about claiming for a rule
+     * @param player who done sth
+     * @return true if rule needs to stop chain
+     */
     protected abstract boolean canDo(player player);
 
+    /**
+     * simple cheecker move, wheren old field is white, new have players color
+     */
     void doMove(){
         board.setFieldColor(new_x, new_y, head.currentPlayer.getColor());
         board.setFieldColor(head.currentX, head.currentY, "white");
@@ -52,6 +73,9 @@ public abstract class RuleMove extends rule {
         }
     }
 
+    /**
+     * specific move where neeeds to swich fields color
+     */
     void switchFields(){
         String tmpColor = board.getFieldColor(new_x, new_y);
         board.setFieldColor(head.currentX, head.currentY, board.getFieldColor(new_x, new_y));
@@ -72,12 +96,6 @@ public abstract class RuleMove extends rule {
         }
     }
 
-    protected boolean isActivePlayerCheecker(player player) {
 
-        if(head.currentX == -1 && board.getFieldColor(new_x, new_y) != player.getColor() && board.getFieldColor(new_x, new_y) != "white"){
-            head.newMessageWrite("NOT_YOUR_CHECKER", player);
-            return true;
-        }
-        return false;
-    }
+
 }

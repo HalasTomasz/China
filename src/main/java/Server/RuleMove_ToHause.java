@@ -3,6 +3,9 @@ package Server;
 
 import static java.lang.Math.abs;
 
+/**
+ * rule anty-blocking-base
+ */
 public class RuleMove_ToHause extends RuleMove{
 
     RuleMove_ToHause(serverHead head) {
@@ -10,7 +13,11 @@ public class RuleMove_ToHause extends RuleMove{
     }
 
 
-
+    /**
+     * when enemy block hause can swich cheeckers when close hause
+     * @param player who done sth
+     * @return true if cheeckers swiched
+     */
     @Override
     protected boolean canDo(player player) {
         System.out.println("Try " + this.getClass().getSimpleName());

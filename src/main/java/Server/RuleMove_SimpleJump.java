@@ -2,6 +2,9 @@ package Server;
 
 import static java.lang.Math.abs;
 
+/**
+ * if players wants to jump above sb's cheecker
+ */
 public class RuleMove_SimpleJump extends RuleMove{
 
 
@@ -9,6 +12,11 @@ public class RuleMove_SimpleJump extends RuleMove{
         super(head);
     }
 
+    /**
+     * checking if is sb's cheecker in concerete field
+     * @param closeToCheck
+     * @return
+     */
     private boolean isBeetwen(int closeToCheck){
         for(String color: head.colors){
             if(color.equals(board.getFieldColor(head.getCurrentX()-(head.getCurrentX()-new_x)/2,closeToCheck))){
@@ -21,6 +29,11 @@ public class RuleMove_SimpleJump extends RuleMove{
         return false;
     }
 
+    /**
+     * magic checking is good field clicked
+     * @param player who done sth
+     * @return true if good field clicked
+     */
     @Override
     protected boolean canDo(player player) {
         System.out.println("Try " + this.getClass().getSimpleName());
@@ -56,8 +69,6 @@ public class RuleMove_SimpleJump extends RuleMove{
                 }
             }
         }
-
-
         System.out.println("Failed " + this.getClass().getSimpleName());
         return false;
     }

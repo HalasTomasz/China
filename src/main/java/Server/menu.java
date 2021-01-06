@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
+/**
+ * gui to choose rulers
+ */
 public class menu extends JFrame implements ActionListener{
 	private ArrayList<String> commonAnswers = new ArrayList<>();
 	JLabel rul, play, boar,shape,mov;
@@ -69,7 +72,10 @@ public class menu extends JFrame implements ActionListener{
 	}
 
 
-
+	/**
+	 * set rulers and check correctness
+	 * @param e event
+	 */
 	public void actionPerformed(ActionEvent e){
 		
 		ArrayList<rule> listRule = new ArrayList<>();
@@ -81,7 +87,6 @@ public class menu extends JFrame implements ActionListener{
 		if(rules.isSelected()){
 			listRule.add(new Rule_SayHello(game));
 			listRule.add(new Rule_SBLeft(game));
-			listRule.add(new Rule_gameOver(game));
 			listRule.add(new Rule_WaitForAll(game));
 			listRule.add(new Rule_OnlyCurrentPlayer(game));
 		}

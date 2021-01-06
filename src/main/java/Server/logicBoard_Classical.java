@@ -1,6 +1,8 @@
 package Server;
 
-
+/**
+ * normal star board
+ */
 public abstract class logicBoard_Classical extends logicBoard {
 
     int[] houseUp ={1, 0, 4, 0, 6, 1, 7, 2, 5, 3, 8};
@@ -11,7 +13,6 @@ public abstract class logicBoard_Classical extends logicBoard {
     int[] houseDownRight ={1, 9, 13, 9, 11 ,10, 10, 11, 12, 12, 9};
     int[] array ={1,4,9, 4,4, 4,5, 4,6, 4,7, 4,8, 5,9, 6,3, 7,10, 8,2};
     int[] array2={0,12,9, 12,4, 12,5, 12,6, 12,7, 12,8, 11,9, 10,3, 9,10};
-
 
         logicBoard_Classical(){
 

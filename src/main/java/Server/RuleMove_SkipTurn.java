@@ -1,5 +1,8 @@
 package Server;
 
+/**
+ * if active palyers clicked second time on active cheeceker skip his turn
+ */
 public class RuleMove_SkipTurn extends RuleMove {
 
 
@@ -7,6 +10,11 @@ public class RuleMove_SkipTurn extends RuleMove {
         super(head);
     }
 
+    /**
+     * if active palyers clicked second time on active cheeceker skip his turn
+     * @param player who done sth
+     * @return true if players wants to skip
+     */
     @Override
     protected boolean canDo(player player) {
         System.out.println("Try " + this.getClass().getSimpleName());

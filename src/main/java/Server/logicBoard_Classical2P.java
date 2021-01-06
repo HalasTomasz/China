@@ -1,5 +1,8 @@
 package Server;
 
+/**
+ * star board for 2 players
+ */
 public class logicBoard_Classical2P extends logicBoard_Classical {
 
     logicBoard_Classical2P(){
@@ -8,6 +11,10 @@ public class logicBoard_Classical2P extends logicBoard_Classical {
         decoder(houseDown, "yellow", "red");
     }
 
+    /**
+     * check winning statment for 2 players
+     * @return true if sb win, else false
+     */
     @Override
     protected String hasSbWon() {
         if(checker(houseUp, "yellow", 10)){

@@ -2,6 +2,9 @@ package Server;
 
 import static java.lang.Math.abs;
 
+/**
+ * checking players wants to move to close field
+ */
 public class RuleMove_SimpleWalk extends RuleMove{
 
     RuleMove_SimpleWalk(serverHead head) {
@@ -9,7 +12,11 @@ public class RuleMove_SimpleWalk extends RuleMove{
     }
 
 
-
+    /**
+     * if clicked field is next to current active field
+     * @param player who done sth
+     * @return true if fields are close
+     */
     @Override
     protected boolean canDo(player player) {
         System.out.println("Try " + this.getClass().getSimpleName());

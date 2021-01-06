@@ -3,6 +3,9 @@ package Server;
 import java.net.Socket;
 import java.util.ArrayList;
 
+/**
+ * main thinker, welcome players, set game settings, communicat with players and analyze their words
+ */
 public class serverHead {
     public String[] colors ={ "red", "yellow", "blue", "black", "purple", "green"};
     ArrayList<rule> bannedRules = new ArrayList<rule>();
@@ -19,6 +22,14 @@ public class serverHead {
     player currentPlayer;
     boolean endFlag;
 
+    /**
+     * init server
+     * @param board on whats board we are playing
+     * @param amountPlayers how many players
+     * @param listRule chain of rules
+     * @param shape what's field's shape
+     * @throws Exception if sth wrong
+     */
     public void start(logicBoard board, int amountPlayers, ArrayList<rule> listRule, String shape) throws Exception {
         this.amountPlayers = amountPlayers;
         this.board = board;
@@ -28,9 +39,14 @@ public class serverHead {
         }
         firstRule = listRule.get(0);
 
-        serverPostman.start(this.board.getClass().getSimpleName(), amountPlayers, this);
+        serverPostman.start(amountPlayers, this);
     }
 
+    /**
+     * when sb wants to join
+     * @param accept socket to talk
+     * @return null if everything fine
+     */
     public Runnable newPlayer(Socket accept) {
 
 
@@ -44,13 +60,25 @@ public class serverHead {
         return null;
     }
 
+    /**
+     * read when sb write
+     * @param player who have written
+     * @param command what have written
+     */
     public synchronized void newMessageRead(player player, String command) {
         firstRule.tryCheck(player, command);
+        //isSbWOn?
     }
 
+    /**
+     * to write messages
+     * @param message message to deliver
+     * @param player to whom deliver
+     */
     public void newMessageWrite(String message, player player){
         player.sendMessage(message);
     }
+
     public int getCurrentX(){
         return currentX;
     }
@@ -68,9 +96,10 @@ public class serverHead {
     }
     public String getShape() {return shape; }
     public int getAmountPlayers() { return amountPlayers;}
-    public String[] getColors() { return colors;}
 
-
+    /**
+     * when rule said that next player should play
+     */
     public void nextPlayer() {
 
         setCurrentX(-1);

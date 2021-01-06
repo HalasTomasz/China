@@ -1,5 +1,8 @@
 package Server;
 
+/**
+ * rule when sb try to clic but not a current
+ */
 public class Rule_OnlyCurrentPlayer extends rule {
 
 
@@ -7,6 +10,12 @@ public class Rule_OnlyCurrentPlayer extends rule {
         super(head);
     }
 
+    /**
+     * rule when sb try to clic but not a current
+     * @param player who done action
+     * @param command what action
+     * @return true if player not current
+     */
     @Override
     boolean check(player player, String command) {
         System.out.println("Try " + this.getClass().getSimpleName());

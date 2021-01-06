@@ -1,5 +1,8 @@
 package Server;
 
+/**
+ * be patient and say hello to new player to welcome
+ */
 public class Rule_SayHello extends rule {
 
 
@@ -7,6 +10,12 @@ public class Rule_SayHello extends rule {
         super(head);
     }
 
+    /**
+     * be patient and say hello to new player to welcome
+     * @param player who done action
+     * @param command what action
+     * @return true if sb is new player
+     */
     @Override
     boolean check(player player, String command) {
         System.out.println("Try " + this.getClass().getSimpleName());
