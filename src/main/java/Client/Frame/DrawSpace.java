@@ -143,8 +143,8 @@ public class DrawSpace extends JPanel {
 				}
 			}
 			number++;
-		   }
 		}
+	}
 	
 	/**
 	 * Zwraca wartosc w zmiennej Color
