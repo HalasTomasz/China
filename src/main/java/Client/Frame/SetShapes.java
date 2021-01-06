@@ -14,11 +14,13 @@ public class SetShapes {
 	 * @param y1 - koncowy punkt (y1)
 	 * @return - zwraca gotowe pole o danym ksztalcie itp
 	 */
-	public Land returnShape(String type, float x, float y, float x1, float y1){
+
+	public static Land returnShape(String type, float x, float y, float x1, float y1){
+
 		if(type.equals("Circle")) {
 			return new CIRCLE(x, y, x1, y1);
 		}
-		 else if(type.equals("Square")){
+		 else if(type.equals("Rectangle")){
 		 	return new SQUARE(x, y, x1, y1);
 		}
 		 else {
