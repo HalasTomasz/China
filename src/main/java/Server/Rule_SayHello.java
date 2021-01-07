@@ -6,7 +6,7 @@ package Server;
 public class Rule_SayHello extends rule {
 
 
-    Rule_SayHello(serverHead head) {
+    public Rule_SayHello(serverHead head) {
         super(head);
     }
 

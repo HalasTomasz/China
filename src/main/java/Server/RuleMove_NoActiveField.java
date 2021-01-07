@@ -5,7 +5,7 @@ package Server;
  */
 public class RuleMove_NoActiveField extends RuleMove {
 
-    RuleMove_NoActiveField(serverHead head) {
+    public RuleMove_NoActiveField(serverHead head) {
         super(head);
     }
 

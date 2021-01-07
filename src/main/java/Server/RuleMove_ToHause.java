@@ -8,7 +8,7 @@ import static java.lang.Math.abs;
  */
 public class RuleMove_ToHause extends RuleMove{
 
-    RuleMove_ToHause(serverHead head) {
+    public RuleMove_ToHause(serverHead head) {
         super(head);
     }
 

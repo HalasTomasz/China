@@ -5,7 +5,7 @@ package Server;
  */
 public class Rule_WaitForAll extends rule {
 
-    Rule_WaitForAll(serverHead head) {
+    public Rule_WaitForAll(serverHead head) {
         super(head);
     }
 

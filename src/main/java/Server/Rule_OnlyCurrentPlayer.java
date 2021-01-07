@@ -6,7 +6,7 @@ package Server;
 public class Rule_OnlyCurrentPlayer extends rule {
 
 
-    Rule_OnlyCurrentPlayer(serverHead head) {
+    public Rule_OnlyCurrentPlayer(serverHead head) {
         super(head);
     }
 

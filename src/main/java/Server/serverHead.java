@@ -33,12 +33,15 @@ public class serverHead {
         this.amountPlayers = amountPlayers;
         this.board = board;
         this.shape = shape;
+
         for(int tmp = 0; tmp < listRule.size()-1; tmp++){
             listRule.get(tmp).setNextRule(listRule.get(tmp+1));
         }
         firstRule = listRule.get(0);
 
+
         serverPostman.start(amountPlayers, this);
+
     }
 
     /**
@@ -115,5 +118,27 @@ public class serverHead {
                 break;
             }
         }
+    }
+
+    public void stop() {
+        try {
+            serverPostman.stop();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.exit(0);
+    }
+
+    public void startTest(logicBoard board, int amountPlayers, ArrayList<rule> listRule, String shape) throws Exception {
+        this.amountPlayers = amountPlayers;
+        this.board = board;
+        this.shape = shape;
+
+        for(int tmp = 0; tmp < listRule.size()-1; tmp++){
+            listRule.get(tmp).setNextRule(listRule.get(tmp+1));
+        }
+        System.out.println(listRule.get(0));
+        firstRule = listRule.get(0);
+
     }
 }

@@ -6,7 +6,7 @@ package Server;
 public class RuleMove_SkipTurn extends RuleMove {
 
 
-    RuleMove_SkipTurn(serverHead head) {
+    public RuleMove_SkipTurn(serverHead head) {
         super(head);
     }
 

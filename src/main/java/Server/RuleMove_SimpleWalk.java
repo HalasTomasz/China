@@ -7,7 +7,7 @@ import static java.lang.Math.abs;
  */
 public class RuleMove_SimpleWalk extends RuleMove{
 
-    RuleMove_SimpleWalk(serverHead head) {
+    public RuleMove_SimpleWalk(serverHead head) {
         super(head);
     }
 

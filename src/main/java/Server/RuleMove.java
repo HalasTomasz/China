@@ -93,6 +93,7 @@ public abstract class RuleMove extends rule {
             for(Server.player player: head.getPlayers()){
                 head.newMessageWrite("WON " + board.hasSbWon(), player);
             }
+            head.stop();
         }
     }
 

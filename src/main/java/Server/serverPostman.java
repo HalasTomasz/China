@@ -1,5 +1,6 @@
 package Server;
 import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.concurrent.Executors;
 
 /**
@@ -7,6 +8,8 @@ import java.util.concurrent.Executors;
  */
 public class serverPostman {
 
+
+    static ServerSocket listener;
     /**
      * listen on socket for new players
      * @param amountPlayers how many should be welcomed
@@ -14,7 +17,8 @@ public class serverPostman {
      * @throws Exception if sth wrong
      */
     public static void start( int amountPlayers, serverHead head) throws Exception {
-        var listener = new ServerSocket(58901);
+
+        listener = new ServerSocket(58901);
             System.out.println("Cheese Cheeckers Server is Running...");
             var pool = Executors.newFixedThreadPool(200);
 
@@ -25,6 +29,10 @@ public class serverPostman {
 
                 }
             }
+    }
 
+    public static void stop() throws Exception {
+
+        listener.close();
     }
 }

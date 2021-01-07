@@ -8,7 +8,7 @@ import static java.lang.Math.abs;
 public class RuleMove_SimpleJump extends RuleMove{
 
 
-    RuleMove_SimpleJump(serverHead head) {
+    public RuleMove_SimpleJump(serverHead head) {
         super(head);
     }
 

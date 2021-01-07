@@ -4,7 +4,7 @@ package Server;
  * if sb left game say to everybody
  */
 public class Rule_SBLeft extends rule {
-    Rule_SBLeft(serverHead head) {
+    public Rule_SBLeft(serverHead head) {
         super(head);
     }
 
@@ -23,6 +23,7 @@ public class Rule_SBLeft extends rule {
                 head.newMessageWrite("SB_LEFT", x);
 
             }
+            head.stop();
             return true;
         }
         return false;

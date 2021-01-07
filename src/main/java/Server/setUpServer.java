@@ -16,9 +16,25 @@ public class setUpServer {
 
 		try {
 			game.start(board, howManyPlayers, listRule, shape);
+
+			System.exit(0);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static serverHead createNewGameTest(logicBoard board, int howManyPlayers, String shape, ArrayList<rule> listRule, ArrayList<RuleMove> listMove, serverHead game){
+		for(RuleMove ruleMove: listMove){
+			ruleMove.init(board);
+		}
+
+		try {
+			game.startTest(board, howManyPlayers, listRule, shape);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return game;
 	}
 
 	public static void openMenuWindow(){
