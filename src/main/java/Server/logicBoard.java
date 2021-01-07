@@ -5,7 +5,33 @@ package Server;
  */
 public abstract class logicBoard {
 
-    field[][] fields;
+    public field[][] fields;
+
+    /**
+     * fields color getter
+     * @param x fields x
+     * @param y fields y
+     * @return fields x,y's color
+     */
+    public String getFieldColor(int x, int y){
+        return fields[x][y].getColor();
+    }
+
+    /**
+     * fields color setter
+     * @param x fields x
+     * @param y fields y
+     * @param color new color
+     */
+    public void setFieldColor(int x, int y,String color) {
+        fields[x][y].setColor(color);
+    }
+
+    /**
+     * @return whats winning color for field x,y
+     *
+     */
+    public String getFieldHause(int x, int y) { return fields[x][y].getColorToWin(); }
 
     /**
      * decode fast way to sets fields on board
@@ -19,7 +45,7 @@ public abstract class logicBoard {
                 for (int h = 3; h <= createTables.length - 1; h = h + 2) {
                     for (int i = createTables[h]; i < createTables[2]; i++) {
                         fields[i][createTables[h + 1]].setColor(color);
-                        fields[i][createTables[h + 1]].setHause(winningHause);
+                        fields[i][createTables[h + 1]].setColorToWin(winningHause);
                     }
 
                 }
@@ -27,7 +53,7 @@ public abstract class logicBoard {
                 for (int h = 3; h <= createTables.length - 1; h = h + 2) {
                     for (int i = createTables[h]; i >= createTables[2]; i--) {
                         fields[i][createTables[h + 1]].setColor(color);
-                        fields[i][createTables[h + 1]].setHause(winningHause);
+                        fields[i][createTables[h + 1]].setColorToWin(winningHause);
                     }
                 }
             }
@@ -70,31 +96,7 @@ public abstract class logicBoard {
         }
     }
 
-    /**
-     * fields color getter
-     * @param x fields x
-     * @param y fields y
-     * @return fields x,y's color
-     */
-    public String getFieldColor(int x, int y){
-        return fields[x][y].getColor();
-    }
 
-    /**
-     * fields color setter
-     * @param x fields x
-     * @param y fields y
-     * @param color new color
-     */
-    public void setFieldColor(int x, int y,String color) {
-        fields[x][y].setColor(color);
-    }
-
-    /**
-     * @return whats winning color for field x,y
-     *
-     */
-    public String getFieldHause(int x, int y) { return fields[x][y].colorToWin; }
 
     /**
      * check are all winning fields caputered by sb

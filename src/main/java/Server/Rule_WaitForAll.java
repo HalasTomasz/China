@@ -16,7 +16,7 @@ public class Rule_WaitForAll extends rule {
      * @return true if there not enought players
      */
     @Override
-    boolean check(player player, String command) {
+    protected boolean check(player player, String command) {
         System.out.println("Try " + this.getClass().getSimpleName());
 
         if(head.getAmountPlayers() != head.getPlayers().size()){

@@ -8,19 +8,18 @@ import java.util.ArrayList;
  */
 public class serverHead {
     public String[] colors ={ "red", "yellow", "blue", "black", "purple", "green"};
-    ArrayList<rule> bannedRules = new ArrayList<rule>();
-    String shape;
-    ArrayList<player> players = new ArrayList<player>();
-    logicBoard board;
+    public ArrayList<rule> bannedRules = new ArrayList<rule>();
+    public ArrayList<player> players = new ArrayList<player>();
+    public logicBoard board;
+    public int currentX = -1;
+    public int currentY = -1;
+    public player currentPlayer;
 
-    rule firstRule;
+    private String shape;
+    private rule firstRule;
+    private int amountPlayers;
+    private int currentColor = 0;
 
-    int amountPlayers;
-    int currentX = -1;
-    int currentY = -1;
-    int currentColor = 0;
-    player currentPlayer;
-    boolean endFlag;
 
     /**
      * init server
@@ -67,7 +66,6 @@ public class serverHead {
      */
     public synchronized void newMessageRead(player player, String command) {
         firstRule.tryCheck(player, command);
-        //isSbWOn?
     }
 
     /**

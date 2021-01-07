@@ -15,7 +15,7 @@ public class Rule_SBLeft extends rule {
      * @return true if sb left
      */
     @Override
-    boolean check(player player, String command) {
+    protected boolean check(player player, String command) {
         System.out.println("Try " + this.getClass().getSimpleName());
         if (command.startsWith("LEFT")){
             System.out.println("Done " + this.getClass().getSimpleName());

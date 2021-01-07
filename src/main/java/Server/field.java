@@ -5,9 +5,9 @@ package Server;
  */
 public class field {
 
-    String color = null;
+    private String color = null;
 
-    String colorToWin = null;
+    private String colorToWin = null;
 
     /**
      * @return color getter
@@ -26,6 +26,11 @@ public class field {
      * sets winning color on field
      * @param color winning color
      */
-    public void setHause(String color) { this.colorToWin = color; }
+    public void setColorToWin(String color) { this.colorToWin = color; }
+
+    /**
+     * @return colortoWin getter
+     */
+    public String getColorToWin() { return colorToWin; }
 
 }

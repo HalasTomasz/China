@@ -4,8 +4,8 @@ package Server;
  *
  */
 public abstract class rule {
-    serverHead head;
-    rule nextRule;
+    protected serverHead head;
+    protected rule nextRule;
     rule(serverHead head) {
         this.head = head;
     }
@@ -16,7 +16,7 @@ public abstract class rule {
      * @param command what he said
      * @return true needs to stop
      */
-     boolean tryCheck(player player, String command){
+     public boolean tryCheck(player player, String command){
         if (head.bannedRules.contains(this)){
             return nextRule.tryCheck(player, command);
         }
@@ -37,7 +37,7 @@ public abstract class rule {
      * @param command what action
      * @return true if rule whats to stop chain
      */
-    abstract boolean check(player player, String command);
+    protected abstract boolean check(player player, String command);
 
     /**
      * set nesxt Rule

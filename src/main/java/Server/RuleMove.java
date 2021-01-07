@@ -5,9 +5,9 @@ package Server;
  */
 public abstract class RuleMove extends rule {
 
-    int new_x;
-    int new_y;
-    logicBoard board;
+    protected int new_x;
+    protected int new_y;
+    protected logicBoard board;
 
     RuleMove(serverHead head) {
         super(head);
@@ -17,7 +17,7 @@ public abstract class RuleMove extends rule {
      * to set about what board should rule think
      * @param board board to think
      */
-    void init(logicBoard board){
+    public void init(logicBoard board){
         this.board = board;
     }
 
@@ -29,7 +29,7 @@ public abstract class RuleMove extends rule {
      * @return
      */
     @Override
-    boolean check(player player, String command){
+    protected boolean check(player player, String command){
         if (command.startsWith("MOVE")) {
             try {
                 new_x = Integer.parseInt(command.substring(5).split(";")[0]);
@@ -55,7 +55,7 @@ public abstract class RuleMove extends rule {
     /**
      * simple cheecker move, wheren old field is white, new have players color
      */
-    void doMove(){
+    protected void doMove(){
         board.setFieldColor(new_x, new_y, head.currentPlayer.getColor());
         board.setFieldColor(head.currentX, head.currentY, "white");
         for (Server.player player: head.getPlayers()) {
@@ -76,7 +76,7 @@ public abstract class RuleMove extends rule {
     /**
      * specific move where neeeds to swich fields color
      */
-    void switchFields(){
+    protected void switchFields(){
         String tmpColor = board.getFieldColor(new_x, new_y);
         board.setFieldColor(head.currentX, head.currentY, board.getFieldColor(new_x, new_y));
         board.setFieldColor(new_x, new_y, head.currentPlayer.getColor());

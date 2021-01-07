@@ -10,12 +10,12 @@ import java.util.Scanner;
  * all info about players, sockets start, communication etc
  */
 public class player implements Runnable {
-    Socket socket;
-    String color;
-    serverHead head;
+    private Socket socket;
+    private String color;
+    private serverHead head;
 
-    Scanner input;
-    PrintWriter output;
+    private Scanner input;
+    private PrintWriter output;
 
     public player(Socket socket, String color, serverHead head) {
         this.socket = socket;

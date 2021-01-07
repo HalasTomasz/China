@@ -17,7 +17,7 @@ public class Rule_OnlyCurrentPlayer extends rule {
      * @return true if player not current
      */
     @Override
-    boolean check(player player, String command) {
+    protected boolean check(player player, String command) {
         System.out.println("Try " + this.getClass().getSimpleName());
         if (!head.currentPlayer.equals(player)) {
             System.out.println("Done " + this.getClass().getSimpleName());

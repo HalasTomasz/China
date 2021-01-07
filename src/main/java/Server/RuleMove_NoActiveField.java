@@ -38,7 +38,7 @@ public class RuleMove_NoActiveField extends RuleMove {
      * @param player
      * @return
      */
-    protected boolean isActivePlayerCheecker(player player) {
+    private boolean isActivePlayerCheecker(player player) {
 
         if(head.currentX == -1 && board.getFieldColor(new_x, new_y) != player.getColor() && board.getFieldColor(new_x, new_y) != "white"){
             head.newMessageWrite("NOT_YOUR_CHECKER", player);
