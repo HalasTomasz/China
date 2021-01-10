@@ -97,6 +97,8 @@ public abstract class RuleMove extends rule {
         }
     }
 
-
+    public logicBoard getBoard(){
+        return board;
+    }
 
 }

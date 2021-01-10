@@ -46,7 +46,7 @@ public class player implements Runnable {
      * cannals to communicat and say hello
      * @throws IOException
      */
-    private void setup() throws IOException {
+    public void setup() throws IOException {
         input = new Scanner(socket.getInputStream());
         output = new PrintWriter(socket.getOutputStream(), true);
         output.println("WELCOME " + color);

@@ -27,8 +27,3 @@ public class Rule_OnlyCurrentPlayer extends rule {
         return false;
     }
 }
-/*else if (players.size() != amountPlayers){
-            player.sendMessage("WAIT");
-        } else if (currentPlayer.equals(player)) {
-            player.sendMessage("NOT_YOU");
-        } */

@@ -26,7 +26,7 @@ public abstract class rule {
             if(nextRule != null) {
                 return nextRule.tryCheck(player, command);
             }else{
-                return true;
+                return false;
             }
         }
     }
@@ -45,5 +45,9 @@ public abstract class rule {
      */
     public void setNextRule(rule nextRule){
         this.nextRule = nextRule;
+    }
+
+    public rule getNextRule(){
+        return nextRule;
     }
 }

@@ -20,8 +20,7 @@ public class RuleMove_NoActiveField extends RuleMove {
         if (head.getCurrentX() == -1 && head.getCurrentY() == -1) {
             if(isActivePlayerCheecker(player)){
                 return true;
-            }
-            if (board.getFieldColor(new_x, new_y) == "white"){
+            } else if (board.getFieldColor(new_x, new_y) == "white"){
                 System.out.println("Done " + "Cliced white without active");
             } else {
                 System.out.println("Done " + this.getClass().getSimpleName());

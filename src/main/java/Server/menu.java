@@ -144,6 +144,5 @@ public class menu extends JFrame implements ActionListener{
 		listRule.addAll(listMove);
 		dispose();
 		setUpServer.createNewGame(whatsBoard.get(0), howManyPlayers, shape.get(0), listRule, listMove);
-
 	}
 }

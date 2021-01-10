@@ -5,7 +5,7 @@ package Server;
  */
 public class logicBoard_Classical4P extends logicBoard_Classical {
 
-    logicBoard_Classical4P(){
+    public logicBoard_Classical4P(){
         super();
         decoder(houseUpLeft, "yellow", "red");
         decoder(houseUpRight, "black", "blue");

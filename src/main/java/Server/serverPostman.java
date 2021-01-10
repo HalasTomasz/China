@@ -15,6 +15,7 @@ public class serverPostman {
      * @param amountPlayers how many should be welcomed
      * @param head whats server wants to talk
      * @throws Exception if sth wrong
+     * in while strange condition to run only on tests, where hard to stop
      */
     public static void start( int amountPlayers, serverHead head) throws Exception {
 
@@ -22,7 +23,7 @@ public class serverPostman {
             System.out.println("Cheese Cheeckers Server is Running...");
             var pool = Executors.newFixedThreadPool(200);
 
-            while (true) {
+            while (amountPlayers>0) {
                 for(int x = 0; x<amountPlayers; x++){
 
                     pool.execute(head.newPlayer(listener.accept()));
@@ -32,7 +33,6 @@ public class serverPostman {
     }
 
     public static void stop() throws Exception {
-
         listener.close();
     }
 }

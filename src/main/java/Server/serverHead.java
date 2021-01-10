@@ -4,7 +4,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 /**
- * main thinker, welcome players, set game settings, communicat with players and analyze their words
+ * main thinker, welcome players, COMMAND game's settings, communicat with players and analyze their words
  */
 public class serverHead {
     public String[] colors ={ "red", "yellow", "blue", "black", "purple", "green"};
@@ -14,9 +14,9 @@ public class serverHead {
     public int currentX = -1;
     public int currentY = -1;
     public player currentPlayer;
+    public rule firstRule;
 
     private String shape;
-    private rule firstRule;
     private int amountPlayers;
     private int currentColor = 0;
 
@@ -97,6 +97,8 @@ public class serverHead {
     }
     public String getShape() {return shape; }
     public int getAmountPlayers() { return amountPlayers;}
+    public void setAmountPlayers(int amount) { amountPlayers = amount;}
+
 
     /**
      * when rule said that next player should play
@@ -108,11 +110,10 @@ public class serverHead {
 
         currentColor = (currentColor + 1) % amountPlayers;
 
-
         for(Server.player player: players){
             if(player.getColor().equals(colors[currentColor])){
                 currentPlayer = player;
-                for(Server.player playerr: players) {
+                for(player playerr: players) {
                     newMessageWrite("NOW " + colors[currentColor], playerr);
                 }
                 break;
@@ -126,19 +127,5 @@ public class serverHead {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.exit(0);
-    }
-
-    public void startTest(logicBoard board, int amountPlayers, ArrayList<rule> listRule, String shape) throws Exception {
-        this.amountPlayers = amountPlayers;
-        this.board = board;
-        this.shape = shape;
-
-        for(int tmp = 0; tmp < listRule.size()-1; tmp++){
-            listRule.get(tmp).setNextRule(listRule.get(tmp+1));
-        }
-        System.out.println(listRule.get(0));
-        firstRule = listRule.get(0);
-
     }
 }
