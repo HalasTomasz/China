@@ -51,15 +51,12 @@ public class serverHead {
      */
     public Runnable newPlayer(Socket accept) {
 
-
-        if (players.size() < amountPlayers) {
             players.add(new player(accept, colors[players.size()], this));
             if (players.size() == 1){
                 currentPlayer = players.get(0);
             }
             return players.get(players.size() - 1);
-        }
-        return null;
+
     }
 
     /**

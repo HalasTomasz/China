@@ -1,4 +1,5 @@
 package Server;
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.Executors;
@@ -17,16 +18,33 @@ public class serverPostman {
      * @throws Exception if sth wrong
      * in while strange condition to run only on tests, where hard to stop
      */
-    public static void start( int amountPlayers, serverHead head) throws Exception {
+    public static void start( int amountPlayers, serverHead head) {
 
-        listener = new ServerSocket(58901);
-            System.out.println("Cheese Cheeckers Server is Running...");
+        try {
+            listener = new ServerSocket(58901);
+        } catch (IOException e) {
+            System.out.println("Zajete");
+            System.exit(-1);
+        }
+        System.out.println("Cheese Cheeckers Server is Running...");
             var pool = Executors.newFixedThreadPool(200);
 
             while (amountPlayers>0) {
                 for(int x = 0; x<amountPlayers; x++){
 
-                    pool.execute(head.newPlayer(listener.accept()));
+                    try {
+                        if(head.players.size() < amountPlayers) {
+                            pool.execute(head.newPlayer(listener.accept()));
+                        }
+                    } catch (IOException e) {
+                        System.out.println("Zabawa skonczona");
+                        try {
+                            stop();
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
+                        }
+                        System.exit(0);
+                    }
 
                 }
             }
