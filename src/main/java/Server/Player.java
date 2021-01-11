@@ -9,15 +9,15 @@ import java.util.Scanner;
 /**
  * all info about players, sockets start, communication etc
  */
-public class player implements Runnable {
+public class Player implements Runnable {
     private Socket socket;
     private String color;
-    private serverHead head;
+    private ServerHead head;
 
     private Scanner input;
     private PrintWriter output;
 
-    public player(Socket socket, String color, serverHead head) {
+    public Player(Socket socket, String color, ServerHead head) {
         this.socket = socket;
         this.color = color;
         this.head = head;

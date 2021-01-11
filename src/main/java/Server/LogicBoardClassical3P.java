@@ -3,9 +3,9 @@ package Server;
 /**
  * star board for 3 players
  */
-public class logicBoard_Classical3P extends logicBoard_Classical {
+public class LogicBoardClassical3P extends LogicBoardClassical {
 
-    public logicBoard_Classical3P(){
+    public LogicBoardClassical3P(){
         super();
         decoder(houseUp, "red", null);
         decoder(houseDownLeft, "yellow", null);

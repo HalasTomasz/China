@@ -6,9 +6,9 @@ import static java.lang.Math.abs;
 /**
  * rule anty-blocking-base
  */
-public class RuleMove_ToHause extends RuleMove{
+public class RuleMoveToHause extends RuleMove{
 
-    public RuleMove_ToHause(serverHead head) {
+    public RuleMoveToHause(ServerHead head) {
         super(head);
     }
 
@@ -19,7 +19,7 @@ public class RuleMove_ToHause extends RuleMove{
      * @return true if cheeckers swiched
      */
     @Override
-    protected boolean canDo(player player) {
+    protected boolean canDo(Player player) {
         System.out.println("Try " + this.getClass().getSimpleName());
 
         if(abs(head.currentX-new_x) <=1 && abs(head.currentY-new_y) <= 1 && board.getFieldHause(new_x, new_y).equals(player.getColor()) && !board.getFieldColor(new_x, new_y).equals("white") && !board.getFieldColor(new_x, new_y).equals(player.getColor())){

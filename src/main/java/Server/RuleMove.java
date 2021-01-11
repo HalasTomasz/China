@@ -3,13 +3,13 @@ package Server;
 /**
  * abstract for all rules thining about fields
  */
-public abstract class RuleMove extends rule {
+public abstract class RuleMove extends Rule {
 
     protected int new_x;
     protected int new_y;
-    protected logicBoard board;
+    protected LogicBoard board;
 
-    RuleMove(serverHead head) {
+    RuleMove(ServerHead head) {
         super(head);
     }
 
@@ -17,7 +17,7 @@ public abstract class RuleMove extends rule {
      * to set about what board should rule think
      * @param board board to think
      */
-    public void init(logicBoard board){
+    public void init(LogicBoard board){
         this.board = board;
     }
 
@@ -29,7 +29,7 @@ public abstract class RuleMove extends rule {
      * @return
      */
     @Override
-    protected boolean check(player player, String command){
+    protected boolean check(Player player, String command){
         if (command.startsWith("MOVE")) {
             try {
                 new_x = Integer.parseInt(command.substring(5).split(";")[0]);
@@ -50,7 +50,7 @@ public abstract class RuleMove extends rule {
      * @param player who done sth
      * @return true if rule needs to stop chain
      */
-    protected abstract boolean canDo(player player);
+    protected abstract boolean canDo(Player player);
 
     /**
      * simple cheecker move, wheren old field is white, new have players color
@@ -58,7 +58,7 @@ public abstract class RuleMove extends rule {
     protected void doMove(){
         board.setFieldColor(new_x, new_y, head.currentPlayer.getColor());
         board.setFieldColor(head.currentX, head.currentY, "white");
-        for (Server.player player: head.getPlayers()) {
+        for (Player player: head.getPlayers()) {
             head.newMessageWrite("CHANGE " + new_x + ";" + new_y + ";" + head.currentPlayer.getColor(), player);
             head.newMessageWrite("CHANGE " + head.currentX + ";" + head.currentY + ";" + "white", player);
         }
@@ -67,7 +67,7 @@ public abstract class RuleMove extends rule {
         head.setCurrentY(new_y);
 
         if(board.hasSbWon() != null) {
-            for(Server.player player: head.getPlayers()){
+            for(Player player: head.getPlayers()){
                 head.newMessageWrite("WON " + board.hasSbWon(), player);
             }
         }
@@ -81,7 +81,7 @@ public abstract class RuleMove extends rule {
         board.setFieldColor(head.currentX, head.currentY, board.getFieldColor(new_x, new_y));
         board.setFieldColor(new_x, new_y, head.currentPlayer.getColor());
 
-        for (Server.player player: head.getPlayers()) {
+        for (Player player: head.getPlayers()) {
             head.newMessageWrite("CHANGE " + new_x + ";" + new_y + ";" + head.currentPlayer.getColor(), player);
             head.newMessageWrite("CHANGE " + head.currentX + ";" + head.currentY + ";" + tmpColor, player);
         }
@@ -90,14 +90,14 @@ public abstract class RuleMove extends rule {
         head.setCurrentY(new_y);
 
         if(board.hasSbWon() != null) {
-            for(Server.player player: head.getPlayers()){
+            for(Player player: head.getPlayers()){
                 head.newMessageWrite("WON " + board.hasSbWon(), player);
             }
             head.stop();
         }
     }
 
-    public logicBoard getBoard(){
+    public LogicBoard getBoard(){
         return board;
     }
 

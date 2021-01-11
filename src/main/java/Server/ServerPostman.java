@@ -1,13 +1,12 @@
 package Server;
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.concurrent.Executors;
 
 /**
  * listener on socket for new players
  */
-public class serverPostman {
+public class ServerPostman {
 
 
     static ServerSocket listener;
@@ -18,7 +17,7 @@ public class serverPostman {
      * @throws Exception if sth wrong
      * in while strange condition to run only on tests, where hard to stop
      */
-    public static void start( int amountPlayers, serverHead head) {
+    public static void start( int amountPlayers, ServerHead head) {
 
         try {
             listener = new ServerSocket(58901);

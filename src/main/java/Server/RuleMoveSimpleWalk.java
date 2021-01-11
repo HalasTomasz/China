@@ -5,9 +5,9 @@ import static java.lang.Math.abs;
 /**
  * checking players wants to move to close field
  */
-public class RuleMove_SimpleWalk extends RuleMove{
+public class RuleMoveSimpleWalk extends RuleMove{
 
-    public RuleMove_SimpleWalk(serverHead head) {
+    public RuleMoveSimpleWalk(ServerHead head) {
         super(head);
     }
 
@@ -18,7 +18,7 @@ public class RuleMove_SimpleWalk extends RuleMove{
      * @return true if fields are close
      */
     @Override
-    protected boolean canDo(player player) {
+    protected boolean canDo(Player player) {
         System.out.println("Try " + this.getClass().getSimpleName());
         if(board.getFieldColor(new_x, new_y).equals("white")){
             if(head.getCurrentX() % 2 == 0){

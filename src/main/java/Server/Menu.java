@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * gui to choose rulers
  */
-public class menu extends JFrame implements ActionListener{
+public class Menu extends JFrame implements ActionListener{
 	private ArrayList<String> commonAnswers = new ArrayList<>();
 	JLabel rul, play, boar,shape,mov;
 	JCheckBox rules;
@@ -16,9 +16,9 @@ public class menu extends JFrame implements ActionListener{
 	JCheckBox shapes1,shapes2;
 	JCheckBox move1;
 	JButton b;
-	serverHead game;
+	ServerHead game;
 
-	menu(serverHead game){
+	Menu(ServerHead game){
 		this.game = game;
 		rul=new JLabel("Zasady:");
 		rul.setBounds(40,100,100,20);
@@ -78,17 +78,17 @@ public class menu extends JFrame implements ActionListener{
 	 */
 	public void actionPerformed(ActionEvent e){
 		
-		ArrayList<rule> listRule = new ArrayList<>();
+		ArrayList<Rule> listRule = new ArrayList<>();
 		int howManyPlayers = 2;
-		ArrayList<logicBoard> whatsBoard = new ArrayList<>();
+		ArrayList<LogicBoard> whatsBoard = new ArrayList<>();
 		ArrayList<String> shape = new ArrayList<>();
 		ArrayList<RuleMove> listMove = new ArrayList<>();
 		
 		if(rules.isSelected()){
-			listRule.add(new Rule_SayHello(game));
-			listRule.add(new Rule_SBLeft(game));
-			listRule.add(new Rule_WaitForAll(game));
-			listRule.add(new Rule_OnlyCurrentPlayer(game));
+			listRule.add(new RuleSayHello(game));
+			listRule.add(new RuleSBLeft(game));
+			listRule.add(new RuleWaitForAll(game));
+			listRule.add(new RuleOnlyCurrentPlayer(game));
 		}
 		
 		if(player.isSelected()){
@@ -107,16 +107,16 @@ public class menu extends JFrame implements ActionListener{
 		if(board1.isSelected()){
 			switch (howManyPlayers){
 				case 2:
-					whatsBoard.add(new logicBoard_Classical2P());
+					whatsBoard.add(new LogicBoardClassical2P());
 					break;
 				case 3:
-					whatsBoard.add(new logicBoard_Classical3P());
+					whatsBoard.add(new LogicBoardClassical3P());
 					break;
 				case 4:
-					whatsBoard.add(new logicBoard_Classical4P());
+					whatsBoard.add(new LogicBoardClassical4P());
 					break;
 				case 6:
-					whatsBoard.add(new logicBoard_Classical6P());
+					whatsBoard.add(new LogicBoardClassical6P());
 					break;
 			}
 		}
@@ -129,11 +129,11 @@ public class menu extends JFrame implements ActionListener{
 		}
 		
 		if(move1.isSelected()){
-			listMove.add(new RuleMove_NoActiveField(game));
-			listMove.add(new RuleMove_SkipTurn(game));
-			listMove.add(new RuleMove_SimpleWalk(game));
-			listMove.add(new RuleMove_SimpleJump(game));
-			listMove.add(new RuleMove_ToHause(game));
+			listMove.add(new RuleMoveNoActiveField(game));
+			listMove.add(new RuleMoveSkipTurn(game));
+			listMove.add(new RuleMoveSimpleWalk(game));
+			listMove.add(new RuleMoveSimpleJump(game));
+			listMove.add(new RuleMoveToHause(game));
 		}
 
 		if(listRule.isEmpty()) System.exit(0);
@@ -143,6 +143,6 @@ public class menu extends JFrame implements ActionListener{
 
 		listRule.addAll(listMove);
 		dispose();
-		setUpServer.createNewGame(whatsBoard.get(0), howManyPlayers, shape.get(0), listRule, listMove);
+		SetUpServer.createNewGame(whatsBoard.get(0), howManyPlayers, shape.get(0), listRule, listMove);
 	}
 }

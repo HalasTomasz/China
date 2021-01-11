@@ -3,10 +3,10 @@ package Server;
 /**
  * be patient and say hello to new player to welcome
  */
-public class Rule_SayHello extends rule {
+public class RuleSayHello extends Rule {
 
 
-    public Rule_SayHello(serverHead head) {
+    public RuleSayHello(ServerHead head) {
         super(head);
     }
 
@@ -17,7 +17,7 @@ public class Rule_SayHello extends rule {
      * @return true if sb is new player
      */
     @Override
-    protected boolean check(player player, String command) {
+    protected boolean check(Player player, String command) {
         System.out.println("Try " + this.getClass().getSimpleName());
         if (command.startsWith("WAITING")){
             System.out.println("Done " + this.getClass().getSimpleName());

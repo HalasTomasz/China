@@ -3,8 +3,8 @@ package Server;
 /**
  * if sb left game say to everybody
  */
-public class Rule_SBLeft extends rule {
-    public Rule_SBLeft(serverHead head) {
+public class RuleSBLeft extends Rule {
+    public RuleSBLeft(ServerHead head) {
         super(head);
     }
 
@@ -15,11 +15,11 @@ public class Rule_SBLeft extends rule {
      * @return true if sb left
      */
     @Override
-    protected boolean check(player player, String command) {
+    protected boolean check(Player player, String command) {
         System.out.println("Try " + this.getClass().getSimpleName());
         if (command.startsWith("LEFT")){
             System.out.println("Done " + this.getClass().getSimpleName());
-            for (Server.player x : head.players){
+            for (Player x : head.players){
                 head.newMessageWrite("SB_LEFT", x);
 
             }

@@ -3,7 +3,7 @@ package Server;
 /**
  * represents one filed on board
  */
-public class field {
+public class Field {
 
     private String color = null;
 

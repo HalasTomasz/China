@@ -3,10 +3,10 @@ package Server;
 /**
  *
  */
-public abstract class rule {
-    protected serverHead head;
-    protected rule nextRule;
-    rule(serverHead head) {
+public abstract class Rule {
+    protected ServerHead head;
+    protected Rule nextRule;
+    Rule(ServerHead head) {
         this.head = head;
     }
 
@@ -16,7 +16,7 @@ public abstract class rule {
      * @param command what he said
      * @return true needs to stop
      */
-     public boolean tryCheck(player player, String command){
+     public boolean tryCheck(Player player, String command){
         if (head.bannedRules.contains(this)){
             return nextRule.tryCheck(player, command);
         }
@@ -37,17 +37,17 @@ public abstract class rule {
      * @param command what action
      * @return true if rule whats to stop chain
      */
-    protected abstract boolean check(player player, String command);
+    protected abstract boolean check(Player player, String command);
 
     /**
      * set nesxt Rule
      * @param nextRule next rule in chain
      */
-    public void setNextRule(rule nextRule){
+    public void setNextRule(Rule nextRule){
         this.nextRule = nextRule;
     }
 
-    public rule getNextRule(){
+    public Rule getNextRule(){
         return nextRule;
     }
 }

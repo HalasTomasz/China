@@ -5,10 +5,10 @@ import static java.lang.Math.abs;
 /**
  * if players wants to jump above sb's cheecker
  */
-public class RuleMove_SimpleJump extends RuleMove{
+public class RuleMoveSimpleJump extends RuleMove{
 
 
-    public RuleMove_SimpleJump(serverHead head) {
+    public RuleMoveSimpleJump(ServerHead head) {
         super(head);
     }
 
@@ -35,7 +35,7 @@ public class RuleMove_SimpleJump extends RuleMove{
      * @return true if good field clicked
      */
     @Override
-    protected boolean canDo(player player) {
+    protected boolean canDo(Player player) {
         System.out.println("Try " + this.getClass().getSimpleName());
 
         if(board.getFieldColor(new_x, new_y).equals("white")){

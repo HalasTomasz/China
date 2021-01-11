@@ -6,15 +6,15 @@ import java.util.ArrayList;
 /**
  * main thinker, welcome players, COMMAND game's settings, communicat with players and analyze their words
  */
-public class serverHead {
+public class ServerHead {
     public String[] colors ={ "red", "yellow", "blue", "black", "purple", "green"};
-    public ArrayList<rule> bannedRules = new ArrayList<rule>();
-    public ArrayList<player> players = new ArrayList<player>();
-    public logicBoard board;
+    public ArrayList<Rule> bannedRules = new ArrayList<Rule>();
+    public ArrayList<Player> players = new ArrayList<Player>();
+    public LogicBoard board;
     public int currentX = -1;
     public int currentY = -1;
-    public player currentPlayer;
-    public rule firstRule;
+    public Player currentPlayer;
+    public Rule firstRule;
 
     private String shape;
     private int amountPlayers;
@@ -29,7 +29,7 @@ public class serverHead {
      * @param shape what's field's shape
      * @throws Exception if sth wrong
      */
-    public void start(logicBoard board, int amountPlayers, ArrayList<rule> listRule, String shape) throws Exception {
+    public void start(LogicBoard board, int amountPlayers, ArrayList<Rule> listRule, String shape) throws Exception {
         this.amountPlayers = amountPlayers;
         this.board = board;
         this.shape = shape;
@@ -40,7 +40,7 @@ public class serverHead {
         firstRule = listRule.get(0);
 
 
-        serverPostman.start(amountPlayers, this);
+        ServerPostman.start(amountPlayers, this);
 
     }
 
@@ -51,7 +51,7 @@ public class serverHead {
      */
     public Runnable newPlayer(Socket accept) {
 
-            players.add(new player(accept, colors[players.size()], this));
+            players.add(new Player(accept, colors[players.size()], this));
             if (players.size() == 1){
                 currentPlayer = players.get(0);
             }
@@ -64,7 +64,7 @@ public class serverHead {
      * @param player who have written
      * @param command what have written
      */
-    public synchronized void newMessageRead(player player, String command) {
+    public synchronized void newMessageRead(Player player, String command) {
         firstRule.tryCheck(player, command);
     }
 
@@ -73,7 +73,7 @@ public class serverHead {
      * @param message message to deliver
      * @param player to whom deliver
      */
-    public void newMessageWrite(String message, player player){
+    public void newMessageWrite(String message, Player player){
         player.sendMessage(message);
     }
 
@@ -89,7 +89,7 @@ public class serverHead {
     public void setCurrentY(int newY){
         currentY = newY;
     }
-    public ArrayList<player> getPlayers(){
+    public ArrayList<Player> getPlayers(){
         return players;
     }
     public String getShape() {return shape; }
@@ -107,10 +107,10 @@ public class serverHead {
 
         currentColor = (currentColor + 1) % amountPlayers;
 
-        for(Server.player player: players){
+        for(Player player: players){
             if(player.getColor().equals(colors[currentColor])){
                 currentPlayer = player;
-                for(player playerr: players) {
+                for(Player playerr: players) {
                     newMessageWrite("NOW " + colors[currentColor], playerr);
                 }
                 break;
@@ -120,7 +120,7 @@ public class serverHead {
 
     public void stop() {
         try {
-            serverPostman.stop();
+            ServerPostman.stop();
         } catch (Exception e) {
             e.printStackTrace();
         }

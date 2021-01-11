@@ -3,9 +3,9 @@ package Server;
 /**
  * servers board for game
  */
-public abstract class logicBoard {
+public abstract class LogicBoard {
 
-    public field[][] fields;
+    public Field[][] fields;
 
     /**
      * fields color getter

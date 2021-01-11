@@ -3,9 +3,9 @@ package Server;
 /**
  * checking server know whats to move
  */
-public class RuleMove_NoActiveField extends RuleMove {
+public class RuleMoveNoActiveField extends RuleMove {
 
-    public RuleMove_NoActiveField(serverHead head) {
+    public RuleMoveNoActiveField(ServerHead head) {
         super(head);
     }
 
@@ -15,7 +15,7 @@ public class RuleMove_NoActiveField extends RuleMove {
      * @return true if theres no active field
      */
     @Override
-    protected boolean canDo(player player) {
+    protected boolean canDo(Player player) {
         System.out.println("Try " + this.getClass().getSimpleName());
         if (head.getCurrentX() == -1 && head.getCurrentY() == -1) {
             if(isActivePlayerCheecker(player)){
@@ -37,7 +37,7 @@ public class RuleMove_NoActiveField extends RuleMove {
      * @param player
      * @return
      */
-    private boolean isActivePlayerCheecker(player player) {
+    private boolean isActivePlayerCheecker(Player player) {
 
         if(head.currentX == -1 && board.getFieldColor(new_x, new_y) != player.getColor() && board.getFieldColor(new_x, new_y) != "white"){
             head.newMessageWrite("NOT_YOUR_CHECKER", player);

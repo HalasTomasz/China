@@ -3,12 +3,12 @@ package Server;
 /**
  * class to start server
  */
-public class serverExec {
+public class ServerExec {
     /**
      * main to start server
      * @param args useles
      */
     public static void main(String[] args){
-        setUpServer.openMenuWindow();
+        SetUpServer.openMenuWindow();
     }
 }

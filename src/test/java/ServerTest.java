@@ -4,14 +4,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Map;
 
 import static java.lang.Math.abs;
 import static org.junit.Assert.*;
@@ -19,12 +16,12 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ServerTest {
-    serverHead game;
+    ServerHead game;
 
 
-    ArrayList<rule> listRule = new ArrayList<>();
+    ArrayList<Rule> listRule = new ArrayList<>();
     int howManyPlayers;
-    logicBoard board;
+    LogicBoard board;
     String shape;
     ArrayList<RuleMove> listMove = new ArrayList<>();
 
@@ -45,7 +42,7 @@ public class ServerTest {
         initSimpleStuffForServer();
 
         try {
-            setUpServer.createNewGame(board, howManyPlayers, shape, listRule, listMove);
+            SetUpServer.createNewGame(board, howManyPlayers, shape, listRule, listMove);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -68,7 +65,7 @@ public class ServerTest {
         for(int i = 0; i <listRule.size()-1; i++){
             assertSame(listRule.get(i).getNextRule(), listRule.get(i+1));
         }
-        rule ruleTest = new Rule_SayHello(game);
+        Rule ruleTest = new RuleSayHello(game);
         for(int i = 0; i <listRule.size()-1; i++){
             listRule.get(i).setNextRule(ruleTest);
         }
@@ -121,7 +118,7 @@ public class ServerTest {
     @Test
     public void simpleFunctionBoard2PStackTest() {
         createGame();
-        board = new logicBoard_Classical2P();
+        board = new LogicBoardClassical2P();
         assertEquals(board.getFieldColor(0, 0), null);
         assertEquals(board.getFieldColor(8, 8), "white");
         assertEquals(board.getFieldColor(3, 5), "red");
@@ -132,7 +129,7 @@ public class ServerTest {
     @Test
     public void simpleFunctionBoard3PStackTest() {
         createGame();
-        board = new logicBoard_Classical3P();
+        board = new LogicBoardClassical3P();
         assertEquals(board.getFieldColor(0, 0), null);
         assertEquals(board.getFieldColor(8, 8), "white");
         assertEquals(board.getFieldColor(3, 5), "red");
@@ -142,7 +139,7 @@ public class ServerTest {
     @Test
     public void simpleFunctionBoard4PStackTest() {
         createGame();
-        board = new logicBoard_Classical4P();
+        board = new LogicBoardClassical4P();
         assertEquals(board.getFieldColor(0, 0), null);
         assertEquals(board.getFieldColor(8, 8), "white");
         assertEquals(board.getFieldColor(5, 2), "yellow");
@@ -152,7 +149,7 @@ public class ServerTest {
     @Test
     public void simpleFunctionBoard6PStackTest() {
         createGame();
-        board = new logicBoard_Classical6P();
+        board = new LogicBoardClassical6P();
         assertEquals(board.getFieldColor(0, 0), null);
         assertEquals(board.getFieldColor(8, 8), "white");
         assertEquals(board.getFieldColor(3, 5), "purple");
@@ -169,8 +166,8 @@ public class ServerTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        player player1 = spy(new player(socket,"red", game));
-        player player2 = spy(new player(socket,"red", game));
+        Player player1 = spy(new Player(socket,"red", game));
+        Player player2 = spy(new Player(socket,"red", game));
         game.players.add(player1);
         game.players.add(player2);
         try {
@@ -236,19 +233,19 @@ public class ServerTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        rule testingRule = new Rule_SayHello(game);
+        Rule testingRule = new RuleSayHello(game);
         assertFalse(testingRule.tryCheck(game.players.get(0), "BAD!@#!DATA"));
         assertTrue(testingRule.tryCheck(game.players.get(0), "WAITING"));
 
-        testingRule = new Rule_SBLeft(game);
+        testingRule = new RuleSBLeft(game);
         assertFalse(testingRule.tryCheck(game.players.get(0), "BAD!@#!DATA"));
         assertTrue(testingRule.tryCheck(game.players.get(0), "LEFT"));
 
-        testingRule = new Rule_OnlyCurrentPlayer(game);
+        testingRule = new RuleOnlyCurrentPlayer(game);
         assertFalse(testingRule.tryCheck(game.players.get(0), "good player dont stop/false"));
         assertTrue(testingRule.tryCheck(game.players.get(1), "stop bad player"));
 
-        testingRule = new Rule_WaitForAll(game);
+        testingRule = new RuleWaitForAll(game);
         game.setAmountPlayers(2);
         assertFalse(testingRule.tryCheck(game.players.get(0), "enough"));
         game.setAmountPlayers(3);
@@ -256,7 +253,7 @@ public class ServerTest {
         game.setAmountPlayers(2);
 
 
-        RuleMove testingRuleMove = new RuleMove_NoActiveField(game);
+        RuleMove testingRuleMove = new RuleMoveNoActiveField(game);
         testingRuleMove.init(board);
         game.setCurrentX(-1);
         game.setCurrentY(-1);
@@ -267,7 +264,7 @@ public class ServerTest {
 
 
 
-        testingRuleMove = new RuleMove_ToHause(game);
+        testingRuleMove = new RuleMoveToHause(game);
         testingRuleMove.init(board);
         assertFalse(testingRuleMove.tryCheck(game.players.get(0), "MOVE 12;7"));
         board.setFieldColor(12,6,"red");
@@ -276,7 +273,7 @@ public class ServerTest {
         assertTrue(testingRuleMove.tryCheck(game.players.get(0), "MOVE 13;6"));
 
 
-        testingRuleMove = new RuleMove_SimpleJump(game);
+        testingRuleMove = new RuleMoveSimpleJump(game);
         testingRuleMove.init(board);
         assertFalse(testingRuleMove.tryCheck(game.players.get(0), "MOVE 8;7"));
         board.setFieldColor(7,4,"red");
@@ -286,13 +283,13 @@ public class ServerTest {
         game.setCurrentY(4);
         assertTrue(testingRuleMove.tryCheck(game.players.get(0), "MOVE 7;6"));
 
-        testingRuleMove = new RuleMove_SimpleWalk(game);
+        testingRuleMove = new RuleMoveSimpleWalk(game);
         testingRuleMove.init(board);
         assertFalse(testingRuleMove.tryCheck(game.players.get(0), "MOVE 12;6"));
 
         assertTrue(testingRuleMove.tryCheck(game.players.get(0), "MOVE 7;7"));
 
-        testingRuleMove = new RuleMove_SkipTurn(game);
+        testingRuleMove = new RuleMoveSkipTurn(game);
         testingRuleMove.init(board);
         assertFalse(testingRuleMove.tryCheck(game.players.get(0), "MOVE 7;1"));
         assertFalse(testingRuleMove.tryCheck(game.players.get(0), "MOVE 3;6"));
@@ -303,23 +300,23 @@ public class ServerTest {
     }
 
     private void initSimpleStuffForServer(){
-        game = new serverHead();
+        game = new ServerHead();
         listRule = new ArrayList<>();
         listMove = new ArrayList<>();
-        listRule.add(new Rule_SayHello(game));
-        listRule.add(new Rule_SBLeft(game));
-        listRule.add(new Rule_WaitForAll(game));
-        listRule.add(new Rule_OnlyCurrentPlayer(game));
+        listRule.add(new RuleSayHello(game));
+        listRule.add(new RuleSBLeft(game));
+        listRule.add(new RuleWaitForAll(game));
+        listRule.add(new RuleOnlyCurrentPlayer(game));
 
         howManyPlayers = 0;
-        board = new logicBoard_Classical2P();
+        board = new LogicBoardClassical2P();
         shape = "Circle";
 
-        listMove.add(new RuleMove_NoActiveField(game));
-        listMove.add(new RuleMove_SkipTurn(game));
-        listMove.add(new RuleMove_SimpleWalk(game));
-        listMove.add(new RuleMove_SimpleJump(game));
-        listMove.add(new RuleMove_ToHause(game));
+        listMove.add(new RuleMoveNoActiveField(game));
+        listMove.add(new RuleMoveSkipTurn(game));
+        listMove.add(new RuleMoveSimpleWalk(game));
+        listMove.add(new RuleMoveSimpleJump(game));
+        listMove.add(new RuleMoveToHause(game));
         listRule.addAll(listMove);
     }
 

@@ -3,10 +3,10 @@ package Server;
 /**
  * rule when sb try to clic but not a current
  */
-public class Rule_OnlyCurrentPlayer extends rule {
+public class RuleOnlyCurrentPlayer extends Rule {
 
 
-    public Rule_OnlyCurrentPlayer(serverHead head) {
+    public RuleOnlyCurrentPlayer(ServerHead head) {
         super(head);
     }
 
@@ -17,7 +17,7 @@ public class Rule_OnlyCurrentPlayer extends rule {
      * @return true if player not current
      */
     @Override
-    protected boolean check(player player, String command) {
+    protected boolean check(Player player, String command) {
         System.out.println("Try " + this.getClass().getSimpleName());
         if (!head.currentPlayer.equals(player)) {
             System.out.println("Done " + this.getClass().getSimpleName());
