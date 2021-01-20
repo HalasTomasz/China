@@ -34,7 +34,7 @@ public class ServerHead {
         this.amountPlayers = amountPlayers;
         this.board = board;
         this.shape = shape;
-
+        
         for(int tmp = 0; tmp < listRule.size()-1; tmp++){
             listRule.get(tmp).setNextRule(listRule.get(tmp+1));
         }

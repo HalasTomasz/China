@@ -10,7 +10,8 @@ public class SetUpServer {
 
 	private static ServerHead game = new ServerHead();
 	public static void createNewGame(LogicBoard board, int howManyPlayers, String shape, ArrayList<Rule> listRule, ArrayList<RuleMove> listMove){
-
+		
+		if(game.state==1) DataBase.getInstance().createSQl(board.getClass().getSimpleName(),howManyPlayers,shape);
 		for(RuleMove ruleMove: listMove){
 			ruleMove.init(board);
 		}
@@ -21,8 +22,7 @@ public class SetUpServer {
 			e.printStackTrace();
 		}
 	}
-
-
+	
 
 	public static void openMenuWindow(){
 		new Menu(game);
