@@ -9,5 +9,8 @@
         <module name="China" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="China" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

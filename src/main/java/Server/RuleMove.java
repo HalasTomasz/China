@@ -1,22 +1,35 @@
 package Server;
 
-public abstract class RuleMove extends rule {
+/**
+ * abstract for all rules thining about fields
+ */
+public abstract class RuleMove extends Rule {
 
-    int new_x;
-    int new_y;
-    logicBoard board;
+    protected int new_x;
+    protected int new_y;
+    protected LogicBoard board;
 
-    RuleMove(serverHead head) {
+    RuleMove(ServerHead head) {
         super(head);
     }
 
-    void init(logicBoard board){
+    /**
+     * to set about what board should rule think
+     * @param board board to think
+     */
+    public void init(LogicBoard board){
         this.board = board;
     }
 
 
+    /**
+     * if player try to move and good data think can i done sth
+     * @param player who done action
+     * @param command what action
+     * @return
+     */
     @Override
-    boolean check(player player, String command){
+    protected boolean check(Player player, String command){
         if (command.startsWith("MOVE")) {
             try {
                 new_x = Integer.parseInt(command.substring(5).split(";")[0]);
@@ -32,12 +45,24 @@ public abstract class RuleMove extends rule {
 
     }
 
-    protected abstract boolean canDo(player player);
+    /**
+     * specifc thinnking about claiming for a rule
+     * @param player who done sth
+     * @return true if rule needs to stop chain
+     */
+    protected abstract boolean canDo(Player player);
 
-    void doMove(){
+    /**
+     * simple cheecker move, wheren old field is white, new have players color
+     */
+    protected void doMove(){
         board.setFieldColor(new_x, new_y, head.currentPlayer.getColor());
         board.setFieldColor(head.currentX, head.currentY, "white");
-        for (Server.player player: head.getPlayers()) {
+        if(head.state == 1){
+            DataBase.getInstance().saveToSql("CHANGE " + new_x + ";" + new_y + ";" + head.currentPlayer.getColor() + "|" + "CHANGE " + head.currentX + ";" + head.currentY + ";" + "white");
+
+        }
+        for (Player player: head.getPlayers()) {
             head.newMessageWrite("CHANGE " + new_x + ";" + new_y + ";" + head.currentPlayer.getColor(), player);
             head.newMessageWrite("CHANGE " + head.currentX + ";" + head.currentY + ";" + "white", player);
         }
@@ -46,18 +71,25 @@ public abstract class RuleMove extends rule {
         head.setCurrentY(new_y);
 
         if(board.hasSbWon() != null) {
-            for(Server.player player: head.getPlayers()){
+            for(Player player: head.getPlayers()){
                 head.newMessageWrite("WON " + board.hasSbWon(), player);
             }
         }
     }
 
-    void switchFields(){
+    /**
+     * specific move where neeeds to swich fields color
+     */
+    protected void switchFields(){
         String tmpColor = board.getFieldColor(new_x, new_y);
         board.setFieldColor(head.currentX, head.currentY, board.getFieldColor(new_x, new_y));
         board.setFieldColor(new_x, new_y, head.currentPlayer.getColor());
 
-        for (Server.player player: head.getPlayers()) {
+        if(head.state == 1){
+            DataBase.getInstance().saveToSql("CHANGE " + new_x + ";" + new_y + ";" + head.currentPlayer.getColor() + "|" + "CHANGE " + head.currentX + ";" + head.currentY + ";" + tmpColor);
+        }
+
+        for (Player player: head.getPlayers()) {
             head.newMessageWrite("CHANGE " + new_x + ";" + new_y + ";" + head.currentPlayer.getColor(), player);
             head.newMessageWrite("CHANGE " + head.currentX + ";" + head.currentY + ";" + tmpColor, player);
         }
@@ -66,18 +98,15 @@ public abstract class RuleMove extends rule {
         head.setCurrentY(new_y);
 
         if(board.hasSbWon() != null) {
-            for(Server.player player: head.getPlayers()){
+            for(Player player: head.getPlayers()){
                 head.newMessageWrite("WON " + board.hasSbWon(), player);
             }
+            head.stop();
         }
     }
 
-    protected boolean isActivePlayerCheecker(player player) {
-
-        if(head.currentX == -1 && board.getFieldColor(new_x, new_y) != player.getColor() && board.getFieldColor(new_x, new_y) != "white"){
-            head.newMessageWrite("NOT_YOUR_CHECKER", player);
-            return true;
-        }
-        return false;
+    public LogicBoard getBoard(){
+        return board;
     }
+
 }
