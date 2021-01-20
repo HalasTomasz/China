@@ -181,7 +181,7 @@ public class Menu extends JFrame implements ActionListener{
 					//****************************************************
 				listMove.clear();
 				listRule.clear();
-				listMove.add(new RuleMoveReplay(game));
+				listRule.add(new RuleReplay(game));
 				break;
 		}
 
