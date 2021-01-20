@@ -32,6 +32,9 @@ public abstract class ServerAdapter {
 	public void changePlayer(String color){
 	}
 	
+	public void changeButton(){
+	}
+	
 	/**
 	 * Zwroc ramke
 	 * @return Component

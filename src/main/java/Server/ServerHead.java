@@ -10,6 +10,7 @@ public class ServerHead {
     public String[] colors ={ "red", "yellow", "blue", "black", "purple", "green"};
     public ArrayList<Rule> bannedRules = new ArrayList<Rule>();
     public ArrayList<Player> players = new ArrayList<Player>();
+    public int state = 0;
     public LogicBoard board;
     public int currentX = -1;
     public int currentY = -1;
@@ -95,6 +96,7 @@ public class ServerHead {
     public String getShape() {return shape; }
     public int getAmountPlayers() { return amountPlayers;}
     public void setAmountPlayers(int amount) { amountPlayers = amount;}
+
 
 
     /**

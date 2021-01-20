@@ -1,6 +1,7 @@
 package Server;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
@@ -9,12 +10,13 @@ import java.util.ArrayList;
  */
 public class Menu extends JFrame implements ActionListener{
 	private ArrayList<String> commonAnswers = new ArrayList<>();
-	JLabel rul, play, boar,shape,mov;
+	JLabel rul, play, boar,shape,mov,loa;
 	JCheckBox rules;
 	JCheckBox player,player2,player3,player4;
 	JCheckBox board1;
 	JCheckBox shapes1,shapes2;
 	JCheckBox move1;
+	JCheckBox load1,load2,load3;
 	JButton b;
 	ServerHead game;
 
@@ -53,8 +55,17 @@ public class Menu extends JFrame implements ActionListener{
 		move1=new JCheckBox("Ruchy podstawowe");
 		move1.setBounds(200,500,150,20);
 		
+		loa = new JLabel("Wczytaj");
+		loa.setBounds(40,600,100,20);
+		load1=new JCheckBox("Tryb normalny");
+		load1.setBounds(200,600,150,20);
+		load2=new JCheckBox("Tryb nagrywania");
+		load2.setBounds(400,600,150,20);
+		load3=new JCheckBox("Tryb wczytwania");
+		load3.setBounds(600,600,150,20);
+		
 		b=new JButton("Utworz");
-		b.setBounds(500,600,80,30);
+		b.setBounds(500,700,80,30);
 		b.addActionListener(this);
 		
 		add(rul);add(rules);
@@ -62,9 +73,10 @@ public class Menu extends JFrame implements ActionListener{
 		add(boar);add(board1);
 		add(shape);add(shapes1);add(shapes2);
 		add(mov);add(move1);
+		add(loa);add(load1);add(load2);add(load3);
 		add(b);
 		
-		setSize(1000,680);
+		setSize(1000,800);
 		setLayout(null);
 		setVisible(true);
 		
@@ -79,10 +91,11 @@ public class Menu extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e){
 		
 		ArrayList<Rule> listRule = new ArrayList<>();
-		int howManyPlayers = 2;
+		int howManyPlayers = 0;
 		ArrayList<LogicBoard> whatsBoard = new ArrayList<>();
 		ArrayList<String> shape = new ArrayList<>();
 		ArrayList<RuleMove> listMove = new ArrayList<>();
+		int activ = -1;
 		
 		if(rules.isSelected()){
 			listRule.add(new RuleSayHello(game));
@@ -135,14 +148,52 @@ public class Menu extends JFrame implements ActionListener{
 			listMove.add(new RuleMoveSimpleJump(game));
 			listMove.add(new RuleMoveToHause(game));
 		}
+		
+		if(load1.isSelected()){
+			activ = 0;
+		}
+		if(load2.isSelected()){
+			activ = 1;
+		}
+		if(load3.isSelected()){
+			activ = 2;
+		}
+		
+		switch(activ){
+			case 1:
+				game.state = 1;
+				break;
+			case 2:
+					JPanel jPanel = new JPanel(new GridLayout(1,1));
+					JLabel jLabel = new JLabel("Podaj ID gry:");
+					JTextField jTextField = new JTextField();
+					jPanel.add(jLabel);
+					jPanel.add(jTextField);
+					while(jTextField.getText().isEmpty()){
+						try{
+							JOptionPane.showMessageDialog(this, jPanel, "Logowanie", JOptionPane.PLAIN_MESSAGE );
+							DataBase.getInstance().setGameID(Integer.parseInt(jTextField.getText()));
+						}catch (NumberFormatException en){
+							System.out.println("Bat data");
+							System.exit(0);
+						}
+					}
+					//****************************************************
+				listMove.clear();
+				listRule.clear();
+				listMove.add(new RuleMoveReplay(game));
+				break;
+		}
 
 		if(listRule.isEmpty()) System.exit(0);
 		if(whatsBoard.size()!=1) System.exit(0);
 		if(shape.size()!=1) System.exit(0);
 		if(listMove.isEmpty()) System.exit(0);
+		if(activ == -1) System.exit(0); // PAMIETAJ ZEBY ZAZNACZYC TO POLE
 
 		listRule.addAll(listMove);
 		dispose();
-		SetUpServer.createNewGame(whatsBoard.get(0), howManyPlayers, shape.get(0), listRule, listMove);
+		SetUpServer.createNewGame(whatsBoard.get(0), howManyPlayers, shape.get(0), listRule, listMove); // DODAJ SOBIE DO SERWERA
+		//ZMIENA ACTIVE 0,1,2            gdy zmienna == -1 program sie wylaczy
 	}
 }

@@ -2,6 +2,8 @@ package Client.Frame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
@@ -14,16 +16,21 @@ import java.util.ArrayList;
  * sizeBoard - wszytskie Pola na planszy
  * filedOfCommand - ilosc komend tworzacych pola neutralne (biale)
  */
-public class Draw extends JFrame {
+public class Draw extends JFrame implements ActionListener {
 	private final DrawSpace panel;
 	private final ArrayList<int[]> createTables = new ArrayList<>();
-	
+	private final JButton button = new JButton();
 	private final JButton button2 = new JButton();
+	private final JLabel writing = new JLabel("Gracz:");
+	private final JLabel turn = new JLabel("Tura:");
 	private int Height;
 	private int Width;
 	private Land[][] sizeBoard;
 	private int filedOfCommand = 0;
-	
+	private GUI gui;
+	private enum Actions{
+		Push,Back
+	}
 	/**
 	 * Konstruktor ramki tworzy ramke i dodaje do niej wlasciwosci
 	 *
@@ -37,7 +44,7 @@ public class Draw extends JFrame {
 		
 		setSizes(); // ustawiam rozmiar ramki
 		prepareData(boardName, typeOfFigures); // ustawiam typ planszy oraz typ pol (figura)
-		
+		this.gui=gui;
 		
 		setLocationByPlatform(true);
 		setResizable(true);
@@ -48,17 +55,15 @@ public class Draw extends JFrame {
 		panel = new DrawSpace(this.sizeBoard, this.createTables, Players, filedOfCommand, gui);
 		panel.setBackground(Color.WHITE); // tworzy panel
 		
-		JButton button = new JButton();
 		button.setBackground(panel.colorDecoder(myColor));
 		button.setBounds(Width, Height, Width, Height);
 		button.setOpaque(true);
-		JLabel writing = new JLabel("Gracz:");
+		
 		writing.setBounds(Width, Height, 50, 20); // Umożliwia pokazanie koloru gracza
 		
 		button2.setBackground(panel.colorDecoder("red"));
 		button2.setBounds(Width, Height, Width, Height);
 		button2.setOpaque(true);
-		JLabel turn = new JLabel("Tura:");
 		turn.setBounds(Width, Height, 50, 20); // Umożliwia pokazanie czyja jest tura
 		
 		panel.add(writing);
@@ -152,5 +157,26 @@ public class Draw extends JFrame {
 	 */
 	public void changePlayer(String color){
 		button2.setBackground(panel.colorDecoder(color));
+	}
+	
+	public void changeButtons(){
+		writing.setText("Powrot");
+		turn.setText("Naprzod");
+		button.setBackground(panel.colorDecoder("white"));
+		button2.setBackground(panel.colorDecoder("white"));
+		button.setActionCommand(Actions.Back.name());
+		button.addActionListener(this);
+		button2.setActionCommand(Actions.Push.name());
+		button2.addActionListener(this);
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getActionCommand().equals(Actions.Push.name())){
+			gui.sendInfo(1,1);
+		}
+		else{
+			gui.sendInfo(-1,-1);
+		}
 	}
 }

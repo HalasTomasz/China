@@ -78,6 +78,11 @@ public class GUI extends ServerAdapter{
 		draw.changePlayer(color);
 	}
 	
+	@Override
+	public void changeButton(){
+		draw.changeButtons();
+	}
+	
 	/**
 	 * Przeslij ramke
 	 * @return Draw

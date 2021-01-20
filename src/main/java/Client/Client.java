@@ -43,6 +43,9 @@ public class Client {
             gui.winner(); // Wygrana
         } else if (response.startsWith("NOT_YOUR")) {
             gui.notChecker(); // Nie twoj Pionek
+        }
+        else if (response.startsWith("LOOKING")) {
+            gui.changeButton(); //uruchamia tryb
         } else if (response.startsWith("CHANGE")) {
             tmp = response.substring(7).split(";");
             try {
@@ -61,6 +64,7 @@ public class Client {
             tmp = response.substring(3).split(" ");
             gui.changePlayer(tmp[1]); // Czyja tura
         }
+        
     }
     
     /**

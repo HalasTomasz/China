@@ -58,6 +58,10 @@ public abstract class RuleMove extends Rule {
     protected void doMove(){
         board.setFieldColor(new_x, new_y, head.currentPlayer.getColor());
         board.setFieldColor(head.currentX, head.currentY, "white");
+        if(head.state == 1){
+            DataBase.getInstance().saveToSql("CHANGE " + new_x + ";" + new_y + ";" + head.currentPlayer.getColor() + "|" + "CHANGE " + head.currentX + ";" + head.currentY + ";" + "white");
+
+        }
         for (Player player: head.getPlayers()) {
             head.newMessageWrite("CHANGE " + new_x + ";" + new_y + ";" + head.currentPlayer.getColor(), player);
             head.newMessageWrite("CHANGE " + head.currentX + ";" + head.currentY + ";" + "white", player);
@@ -80,6 +84,10 @@ public abstract class RuleMove extends Rule {
         String tmpColor = board.getFieldColor(new_x, new_y);
         board.setFieldColor(head.currentX, head.currentY, board.getFieldColor(new_x, new_y));
         board.setFieldColor(new_x, new_y, head.currentPlayer.getColor());
+
+        if(head.state == 1){
+            DataBase.getInstance().saveToSql("CHANGE " + new_x + ";" + new_y + ";" + head.currentPlayer.getColor() + "|" + "CHANGE " + head.currentX + ";" + head.currentY + ";" + tmpColor);
+        }
 
         for (Player player: head.getPlayers()) {
             head.newMessageWrite("CHANGE " + new_x + ";" + new_y + ";" + head.currentPlayer.getColor(), player);
