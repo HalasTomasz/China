@@ -18,9 +18,8 @@ public class GUI extends ServerAdapter{
 	
 	private final int Players;
 	private final Client Client;
-
 	private Draw draw;
-
+	
 	
 	/**
 	 * Tworze ramke i dodaje do niej ComponentListener
@@ -36,7 +35,7 @@ public class GUI extends ServerAdapter{
 		this.Client=client;
 		EventQueue.invokeLater(() ->
 		{
-
+			
 			draw = new Draw(boardName, typeOfFigures, mycolor, this.Players,this); //Ramka
 			draw.addComponentListener(new ComponentAdapter() {
 				public void componentResized(ComponentEvent componentEvent) {
@@ -46,11 +45,7 @@ public class GUI extends ServerAdapter{
 			draw.setVisible(true); // widocznosc
 		});
 	}
-	@Override
-	public void sendInfo(int x, int y){
-		String Data="MOVE "+x+";"+y;
-		Client.writeMessage(Data);
-	}
+	
 	
 	/**
 	 * Przekaz informacje to serwera
@@ -83,6 +78,11 @@ public class GUI extends ServerAdapter{
 		draw.changePlayer(color);
 	}
 	
+	@Override
+	public void changeButton(){
+		draw.changeButtons();
+	}
+	
 	/**
 	 * Przeslij ramke
 	 * @return Draw
@@ -90,15 +90,6 @@ public class GUI extends ServerAdapter{
 	@Override
 	public Component returnFrame(){
 		return draw;
-	}
-	
-	@Override
-	public void changePlayer(String color){
-		frame.changePlayer(color);
-	}
-	@Override
-	public Draw returnFrame(){
-		return frame;
 	}
 	
 }

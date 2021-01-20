@@ -1,8 +1,11 @@
 package Server;
 
-public class logicBoard_Classical3P extends logicBoard_Classical {
+/**
+ * star board for 3 players
+ */
+public class LogicBoardClassical3P extends LogicBoardClassical {
 
-    logicBoard_Classical3P(){
+    public LogicBoardClassical3P(){
         super();
         decoder(houseUp, "red", null);
         decoder(houseDownLeft, "yellow", null);
@@ -11,7 +14,10 @@ public class logicBoard_Classical3P extends logicBoard_Classical {
         decoder(houseUpRight, "white", "yellow");
         decoder(houseDown, "white", "red");
     }
-
+    /**
+     * check winning statment for 3 players
+     * @return true if sb win, else false
+     */
     @Override
     protected String hasSbWon() {
         if(checker(houseUpRight, "yellow", 10)){

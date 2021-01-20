@@ -1,13 +1,22 @@
 package Server;
 
-public class Rule_WaitForAll extends rule {
+/**
+ * check is all players to play
+ */
+public class RuleWaitForAll extends Rule {
 
-    Rule_WaitForAll(serverHead head) {
+    public RuleWaitForAll(ServerHead head) {
         super(head);
     }
 
+    /**
+     * check is all players to play
+     * @param player who done action
+     * @param command what action
+     * @return true if there not enought players
+     */
     @Override
-    boolean check(player player, String command) {
+    protected boolean check(Player player, String command) {
         System.out.println("Try " + this.getClass().getSimpleName());
 
         if(head.getAmountPlayers() != head.getPlayers().size()){

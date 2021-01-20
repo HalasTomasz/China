@@ -1,7 +1,9 @@
 package Server;
 
-
-public abstract class logicBoard_Classical extends logicBoard {
+/**
+ * normal star board
+ */
+public abstract class LogicBoardClassical extends LogicBoard {
 
     int[] houseUp ={1, 0, 4, 0, 6, 1, 7, 2, 5, 3, 8};
     int[] houseDown ={0, 16, 13, 16, 6, 15, 7, 14, 5, 13, 8};
@@ -12,14 +14,13 @@ public abstract class logicBoard_Classical extends logicBoard {
     int[] array ={1,4,9, 4,4, 4,5, 4,6, 4,7, 4,8, 5,9, 6,3, 7,10, 8,2};
     int[] array2={0,12,9, 12,4, 12,5, 12,6, 12,7, 12,8, 11,9, 10,3, 9,10};
 
+        LogicBoardClassical(){
 
-        logicBoard_Classical(){
-
-            fields = new field[17][13];
+            fields = new Field[17][13];
 
             for(int x = 0; x<17; x++) {
                 for (int y = 0; y<13; y++) {
-                    fields[x][y] = new field();
+                    fields[x][y] = new Field();
                 }
             }
 
